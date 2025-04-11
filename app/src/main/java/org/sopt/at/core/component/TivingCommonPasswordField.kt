@@ -34,7 +34,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.sopt.at.R
-import org.sopt.at.ui.theme.Gray1
 import org.sopt.at.ui.theme.Gray3
 import org.sopt.at.ui.theme.Gray4
 import org.sopt.at.ui.theme.White

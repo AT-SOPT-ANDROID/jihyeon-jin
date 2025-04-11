@@ -11,7 +11,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.sopt.at.core.extension.noRippleClickable
 import org.sopt.at.ui.theme.Black
