@@ -3,4 +3,12 @@
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="title_activity_sign_in">SignInActivity</string>
     <string name="title_activity_my_page">MyPageActivity</string>
+
+
+    <!-- BottomNavigation -->
+    <string name="bottom_navigation_bar_item_home">홈</string>
+    <string name="bottom_navigation_bar_item_shorts">쇼츠</string>
+    <string name="bottom_navigation_bar_item_live">라이브</string>
+    <string name="bottom_navigation_bar_item_search">검색</string>
+    <string name="bottom_navigation_bar_item_history">기록</string>
 </resources>
