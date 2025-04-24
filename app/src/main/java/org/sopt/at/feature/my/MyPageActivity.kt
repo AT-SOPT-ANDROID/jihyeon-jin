@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import org.sopt.at.MainActivity
-import org.sopt.at.MainActivity.Companion.ID
-import org.sopt.at.MainActivity.Companion.TIVING_PREFS
+import org.sopt.at.feature.main.MainActivity
+import org.sopt.at.feature.main.MainActivity.Companion.ID
+import org.sopt.at.feature.main.MainActivity.Companion.TIVING_PREFS
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
 import org.sopt.at.ui.theme.Black
 

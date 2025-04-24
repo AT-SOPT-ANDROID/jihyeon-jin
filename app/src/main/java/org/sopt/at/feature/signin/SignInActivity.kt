@@ -17,11 +17,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.launch
-import org.sopt.at.MainActivity.Companion.ID
-import org.sopt.at.MainActivity.Companion.IS_LOGGED_IN
-import org.sopt.at.MainActivity.Companion.PASSWORD
-import org.sopt.at.MainActivity.Companion.TIVING_PREFS
-import org.sopt.at.core.component.BackButtonTopBar
+import org.sopt.at.feature.main.MainActivity.Companion.ID
+import org.sopt.at.feature.main.MainActivity.Companion.IS_LOGGED_IN
+import org.sopt.at.feature.main.MainActivity.Companion.PASSWORD
+import org.sopt.at.feature.main.MainActivity.Companion.TIVING_PREFS
 import org.sopt.at.core.utils.SnackBarUtils
 import org.sopt.at.feature.my.MyPageActivity
 import org.sopt.at.feature.signup.SignUpActivity

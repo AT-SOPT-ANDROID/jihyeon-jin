@@ -1,4 +1,4 @@
-package org.sopt.at
+package org.sopt.at.feature.main
 
 import android.content.Intent
 import android.os.Bundle
