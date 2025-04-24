@@ -59,6 +59,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.kotlinx.collections.immutable)
 
     //viewmodel
     implementation (libs.androidx.lifecycle.viewmodel.compose)
@@ -70,6 +71,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.kotlin.serialization.converter)
     implementation(libs.kotlinx.serialization.json)
+
+    // Navigation
+    implementation(libs.androidx.compose.navigation)
 
     // hilt
     implementation(libs.hilt.android)
