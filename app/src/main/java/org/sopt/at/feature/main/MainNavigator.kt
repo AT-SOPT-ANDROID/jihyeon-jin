@@ -129,7 +129,7 @@ class MainNavigator(
     @Composable
     fun shouldShowBottomBar(): Boolean {
         return currentDestination?.route?.let { currentRoute ->
-            MainTab.entries.any { tab ->
+            val isTabRoute = MainTab.entries.any { tab ->
                 when (tab.route) {
                     is MainTabRoute.Home -> currentRoute.startsWith(MainTabRoute.Home::class.qualifiedName!!)
                     is MainTabRoute.Shorts -> currentRoute.startsWith(MainTabRoute.Shorts::class.qualifiedName!!)
@@ -138,6 +138,10 @@ class MainNavigator(
                     is MainTabRoute.History -> currentRoute.startsWith(MainTabRoute.History::class.qualifiedName!!)
                 }
             }
+
+            val isMyPage = currentRoute.startsWith(Route.MyPage::class.qualifiedName!!)
+
+            isTabRoute || isMyPage
         } ?: false
     }
 }
