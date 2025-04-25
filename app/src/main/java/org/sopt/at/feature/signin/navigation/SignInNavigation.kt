@@ -5,10 +5,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import org.sopt.at.core.navigation.MainTabRoute
 import org.sopt.at.core.navigation.Route
 import org.sopt.at.feature.signin.SignInRoute
-import org.sopt.at.feature.signin.SignInScreen
 
 fun NavController.navigateToSignIn(email: String, password: String) {
     navigate(Route.SignIn(email,password))
