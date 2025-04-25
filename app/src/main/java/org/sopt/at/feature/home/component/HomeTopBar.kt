@@ -29,7 +29,7 @@ fun HomeTopBar(
     TopAppBar(
         title = {
             Icon(
-                imageVector = ImageVector.vectorResource(R.drawable.logo_tiving),
+                imageVector = ImageVector.vectorResource(R.drawable.ic_tving_logo),
                 contentDescription = stringResource(R.string.app_name),
                 tint = Color.Unspecified,
                 modifier = Modifier.height(48.dp)
@@ -38,7 +38,7 @@ fun HomeTopBar(
         actions = {
             IconButton(onClick = onLiveButtonClick) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.ic_connect),
+                    imageVector = ImageVector.vectorResource(R.drawable.ic_cast),
                     contentDescription = stringResource(R.string.image_cennect),
                     tint = White,
                     modifier = Modifier.size(28.dp)

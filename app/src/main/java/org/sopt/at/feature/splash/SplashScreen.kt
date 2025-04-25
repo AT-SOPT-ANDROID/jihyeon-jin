@@ -62,7 +62,7 @@ fun SplashScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
-            imageVector = ImageVector.vectorResource(R.drawable.logo_tiving),
+            imageVector = ImageVector.vectorResource(R.drawable.ic_tving_logo),
             contentDescription = stringResource(R.string.splash_logo),
             tint = Color.Unspecified
         )
