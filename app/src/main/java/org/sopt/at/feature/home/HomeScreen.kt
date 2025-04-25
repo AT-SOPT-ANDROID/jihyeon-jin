@@ -70,7 +70,7 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Black)
-                    .padding(16.dp),
+                    .padding(8.dp),
                 onContentTypeSelected = { contentType ->
                     onContentTypeSelected(contentType)
                     viewModel.sendEvent(
