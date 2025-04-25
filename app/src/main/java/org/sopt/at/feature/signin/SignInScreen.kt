@@ -47,17 +47,17 @@ import org.sopt.at.ui.theme.White
 fun SignInRoute(
     userInputEmail: String,
     userInputPassword: String,
-    padding: PaddingValues,
-    onNavigateToHome: () -> Unit = {},
-    onNavigateToSignUp: () -> Unit = {},
+    onNavigateToHome: () -> Unit,
+    onNavigateToSignUp: () -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: SignInViewModel = hiltViewModel()
 ) {
     SignInScreen(
         userInputEmail = userInputEmail,
         userInputPassword = userInputPassword,
-        padding = padding,
         onLoginButtonClick = onNavigateToHome,
         onSignUpButtonClick = onNavigateToSignUp,
+        modifier = modifier,
         viewModel = viewModel
     )
 }
@@ -65,9 +65,9 @@ fun SignInRoute(
 fun SignInScreen(
     userInputEmail: String,
     userInputPassword: String,
-    padding: PaddingValues,
-    onLoginButtonClick: () -> Unit = {},
-    onSignUpButtonClick: () -> Unit = {},
+    onLoginButtonClick: () -> Unit,
+    onSignUpButtonClick: () -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: SignInViewModel = hiltViewModel()
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
@@ -82,8 +82,7 @@ fun SignInScreen(
     else
         Gray4
     Column(
-        modifier = Modifier
-            .padding(padding)
+        modifier = modifier
             .fillMaxSize()
     ) {
         BackButtonTopBar(
@@ -141,8 +140,7 @@ fun SignInScreen(
                                 )
                             )
                             onLoginButtonClick()
-                        }
-                        else {
+                        } else {
                             coroutineScope.launch {
                                 SnackBarUtils.showSnackBar(
                                     message = "아이디 또는 비밀번호가 일치하지 않습니다.",
@@ -155,7 +153,8 @@ fun SignInScreen(
             )
             Spacer(Modifier.height(20.dp))
             Row(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .wrapContentHeight(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
@@ -195,7 +194,8 @@ private fun PreviewSignInScreen() {
         SignInScreen(
             userInputEmail = "",
             userInputPassword = "",
-            padding = PaddingValues(0.dp)
+            onLoginButtonClick = { },
+            onSignUpButtonClick = { }
         )
     }
 }

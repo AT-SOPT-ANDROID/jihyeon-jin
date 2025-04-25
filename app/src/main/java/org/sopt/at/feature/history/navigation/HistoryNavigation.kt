@@ -1,6 +1,7 @@
 package org.sopt.at.feature.history.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -12,11 +13,11 @@ fun NavController.navigateToHistory(navOptions: NavOptions) {
     navigate(MainTabRoute.History, navOptions)
 }
 fun NavGraphBuilder.historyNavGraph(
-    padding: PaddingValues
+    modifier: Modifier = Modifier
 ) {
     composable<MainTabRoute.History> {
         HistoryRoute(
-            padding = padding
+            modifier = modifier
         )
     }
 }

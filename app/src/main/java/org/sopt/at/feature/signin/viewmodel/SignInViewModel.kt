@@ -16,27 +16,7 @@ class SignInViewModel @Inject constructor(
 ) : BaseViewModel<SignInUiState, SignInUiEvent, SignInUiEffect>(SignInUiState()) {
     override fun reduceState(event: SignInUiEvent) {
         when (event) {
-            SignInUiEvent.LoadAuthInfo -> loadAuthInfo()
             is SignInUiEvent.SaveLoginInfo -> saveLoginInfo(event.id, event.password)
-        }
-    }
-
-    private fun loadAuthInfo() {
-        updateState(
-            currentState.copy(
-                isLoading = true
-            )
-        )
-        viewModelScope.launch {
-            val id = preferenceUtil.getUserId()
-            val password = preferenceUtil.getUserPw()
-            updateState(
-                currentState.copy(
-                    isLoading = false,
-                    id = id,
-                    password = password
-                )
-            )
         }
     }
     private fun saveLoginInfo(id: String, password: String) {
@@ -55,6 +35,7 @@ class SignInViewModel @Inject constructor(
                 )
             )
         }
+        preferenceUtil.saveUserId(id)
         preferenceUtil.saveLoginState(true)
     }
 }

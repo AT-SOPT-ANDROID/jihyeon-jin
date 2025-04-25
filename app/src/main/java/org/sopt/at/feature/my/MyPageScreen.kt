@@ -17,20 +17,20 @@ import org.sopt.at.ui.theme.White
 
 @Composable
 fun MyPageRoute(
-    padding: PaddingValues,
     onNavigateToSignIn: (String, String) -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: MyPageViewModel = hiltViewModel()
 ) {
     MyPageScreen(
-        padding = padding,
         onLogOutButtonClick = onNavigateToSignIn,
+        modifier = modifier,
         viewModel = viewModel
     )
 }
 @Composable
 fun MyPageScreen(
-    padding : PaddingValues,
     onLogOutButtonClick: (String, String) -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: MyPageViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -40,11 +40,10 @@ fun MyPageScreen(
     }
 
     Column(
-        modifier = Modifier.fillMaxSize()
-            .padding(padding)
+        modifier = modifier.fillMaxSize()
     ) {
         Text(
-            text = "zz4536",
+            text = state.id,
             color = White
         )
 

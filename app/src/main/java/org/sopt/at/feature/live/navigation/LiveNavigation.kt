@@ -1,6 +1,7 @@
 package org.sopt.at.feature.live.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -12,11 +13,11 @@ fun NavController.navigateToLive(navOptions: NavOptions) {
     navigate(MainTabRoute.Live, navOptions)
 }
 fun NavGraphBuilder.liveNavGraph(
-    padding: PaddingValues
+    modifier: Modifier = Modifier
 ) {
     composable<MainTabRoute.Live> {
         LiveRoute(
-            padding = padding
+            modifier = modifier
         )
     }
 }

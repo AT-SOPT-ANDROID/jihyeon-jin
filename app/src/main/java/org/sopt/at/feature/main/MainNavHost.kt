@@ -3,7 +3,6 @@ package org.sopt.at.feature.main
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
@@ -24,58 +23,43 @@ import org.sopt.at.ui.theme.Black
 @Composable
 fun MainNavHost(
     modifier: Modifier = Modifier,
-    navigator: MainNavigator,
-    padding: PaddingValues
+    navigator: MainNavigator
 ) {
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(Black)
-            .systemBarsPadding()
     ) {
         NavHost(
             navController = navigator.navController,
             startDestination = navigator.startDestination,
         ) {
             homeNavGraph(
-                padding = padding,
-                onNavigateToMyPage = navigator::navigateToMyPage
+                onNavigateToMyPage = navigator::navigateToMyPage,
             )
-            shortsNavGraph(
-                padding = padding
-            )
-            liveNavGraph(
-                padding = padding
-            )
-            searchNavGraph(
-                padding = padding
-            )
-            historyNavGraph(
-                padding = padding
-            )
+            shortsNavGraph()
+            liveNavGraph()
+            searchNavGraph()
+            historyNavGraph()
             signInNavGraph(
                 onNavigateToHome = navigator::navigateToHome,
-                onNavigateToSignUp = navigator::navigateToSignUp,
-                padding = padding
+                onNavigateToSignUp = navigator::navigateToSignUp
             )
             signUpNavGraph(
                 onNavigateToSignIn = { email, password ->
                     navigator.navigateToSignIn(email, password)
-                },
-                padding = padding,
+                }
             )
             splashNavGraph(
                 onNavigateToHome = navigator::navigateToHome,
                 onNavigateToSignIn = { email, password ->
                     navigator.navigateToSignIn(email, password)
-                },
-                padding = padding
+                }
             )
             myPageNavGraph(
                 onNavigateToSignIn = { email, password ->
                     navigator.navigateToSignIn(email, password)
-                },
-                padding = padding
+                }
             )
         }
     }

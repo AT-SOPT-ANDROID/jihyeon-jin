@@ -41,18 +41,18 @@ enum class SignUpStep {
 
 @Composable
 fun SignUpRoute(
-    padding: PaddingValues,
+    modifier: Modifier,
     onNavigateToSignIn: (String, String) -> Unit = { _, _ -> }
 ) {
     SignUpScreen(
-        padding = padding,
+        modifier = modifier,
         onNextButtonClick = onNavigateToSignIn
     )
 }
 
 @Composable
 fun SignUpScreen(
-    padding: PaddingValues,
+    modifier: Modifier = Modifier,
     onNextButtonClick: (String, String) -> Unit = { _, _ -> },
 ) {
     var step by remember { mutableStateOf(SignUpStep.ID) }
@@ -77,8 +77,7 @@ fun SignUpScreen(
     val context = LocalContext.current
 
     Column(
-        modifier = Modifier
-            .padding(padding)
+        modifier = modifier
             .fillMaxSize()
     ) {
         BackButtonTopBar(
@@ -176,8 +175,6 @@ fun SignUpScreen(
 @Composable
 private fun PreviewSignUpScreen() {
     Column(Modifier.background(Black)) {
-        SignUpScreen(
-            padding = PaddingValues(0.dp)
-        )
+        SignUpScreen()
     }
 }

@@ -24,25 +24,24 @@ import org.sopt.at.ui.theme.Black
 
 @Composable
 fun HomeRoute(
-    padding: PaddingValues,
     onNavigateToMyPage: () -> Unit,
     onContentTypeSelected: (ContentType) -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     HomeScreen(
-        padding = padding,
         onNavigateToMyPage = onNavigateToMyPage,
         onContentTypeSelected = onContentTypeSelected,
+        modifier = modifier,
         viewModel = viewModel
     )
 }
 
 @Composable
 fun HomeScreen(
-    padding: PaddingValues,
-    modifier: Modifier = Modifier,
     onNavigateToMyPage: () -> Unit,
     onContentTypeSelected: (ContentType) -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val homeState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -52,7 +51,7 @@ fun HomeScreen(
     }
 
     LazyColumn(
-        modifier = modifier.padding(padding),
+        modifier = modifier
     ) {
         item {
             HomeTopBar(

@@ -13,7 +13,6 @@ class SignInContract {
     ) : UiState
 
     sealed class SignInUiEvent : UiEvent {
-        data object LoadAuthInfo : SignInUiEvent()
         data class SaveLoginInfo(val id: String, val password: String) : SignInUiEvent()
     }
 

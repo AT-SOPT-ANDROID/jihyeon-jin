@@ -1,6 +1,7 @@
 package org.sopt.at.feature.shorts.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -12,11 +13,11 @@ fun NavController.navigateToShorts(navOptions: NavOptions) {
     navigate(MainTabRoute.Shorts, navOptions)
 }
 fun NavGraphBuilder.shortsNavGraph(
-    padding: PaddingValues
+    modifier: Modifier = Modifier
 ) {
     composable<MainTabRoute.Shorts> {
         ShortsRoute(
-            padding = padding
+            modifier = modifier
         )
     }
 }

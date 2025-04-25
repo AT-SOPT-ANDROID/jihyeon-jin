@@ -6,8 +6,12 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.isImeVisible
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -39,19 +43,19 @@ private fun MainScreenContent(
     navigator: MainNavigator,
     snackBarHostState: SnackbarHostState,
 ) {
-    val imeIsShown = WindowInsets.isImeVisible
-
     Scaffold(
         modifier = modifier,
-        content = { padding ->
+        content = { innerPadding ->
             MainNavHost(
                 navigator = navigator,
-                padding = PaddingValues(
-                    start = padding.calculateStartPadding(layoutDirection = LayoutDirection.Ltr),
-                    end = padding.calculateEndPadding(layoutDirection = LayoutDirection.Ltr),
-                    bottom = if (imeIsShown) 0.dp else padding.calculateBottomPadding(),
-                    top = 16.dp
-                )
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Black)
+                    .padding(
+                        start = innerPadding.calculateStartPadding(LayoutDirection.Ltr),
+                        end = innerPadding.calculateEndPadding(LayoutDirection.Ltr)
+                    )
+                    .systemBarsPadding()
             )
         },
         bottomBar = {

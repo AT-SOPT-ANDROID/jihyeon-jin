@@ -10,19 +10,18 @@ import org.sopt.at.ui.theme.Black
 
 @Composable
 fun LiveRoute(
-    padding: PaddingValues
+    modifier: Modifier = Modifier
 ) {
     LiveScreen(
-        padding = padding
+       modifier = modifier
     )
 }
 @Composable
 fun LiveScreen(
-    padding: PaddingValues
+    modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
-            .padding(padding)
+        modifier = modifier
             .background(Black)
     ) {
 

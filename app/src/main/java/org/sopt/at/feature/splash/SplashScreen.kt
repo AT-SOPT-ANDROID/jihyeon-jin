@@ -3,9 +3,7 @@ package org.sopt.at.feature.splash
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,13 +25,13 @@ import org.sopt.at.ui.theme.Black
 fun SplashRoute(
     onNavigateToHome: () -> Unit,
     onNavigateToSignIn: (String, String) -> Unit,
-    padding: PaddingValues,
+    modifier: Modifier = Modifier,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
     SplashScreen(
         onNavigateToHome = onNavigateToHome,
         onNavigateToSignIn = onNavigateToSignIn,
-        padding = padding,
+        modifier = modifier,
         viewModel = viewModel
     )
 }
@@ -42,7 +40,6 @@ fun SplashRoute(
 fun SplashScreen(
     onNavigateToHome: () -> Unit,
     onNavigateToSignIn: (String, String) -> Unit,
-    padding: PaddingValues,
     modifier: Modifier = Modifier,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
@@ -60,7 +57,6 @@ fun SplashScreen(
     Column(
         modifier = modifier
             .background(color = Black)
-            .padding(padding)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center

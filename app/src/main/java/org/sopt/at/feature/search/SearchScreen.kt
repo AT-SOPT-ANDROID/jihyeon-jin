@@ -10,19 +10,18 @@ import org.sopt.at.ui.theme.Black
 
 @Composable
 fun SearchRoute(
-    padding: PaddingValues
+    modifier: Modifier = Modifier
 ) {
     SearchScreen(
-        padding = padding
+        modifier = modifier
     )
 }
 @Composable
 fun SearchScreen(
-    padding: PaddingValues
+    modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
-            .padding(padding)
+        modifier = modifier
             .background(Black)
     ) {
 

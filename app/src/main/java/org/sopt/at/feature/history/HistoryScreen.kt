@@ -10,19 +10,18 @@ import org.sopt.at.ui.theme.Black
 
 @Composable
 fun HistoryRoute(
-    padding: PaddingValues
+    modifier: Modifier = Modifier
 ) {
     HistoryScreen(
-        padding = padding
+        modifier = modifier
     )
 }
 @Composable
 fun HistoryScreen(
-    padding: PaddingValues
+    modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
-            .padding(padding)
+        modifier = modifier
             .background(Black)
     ) {
 
