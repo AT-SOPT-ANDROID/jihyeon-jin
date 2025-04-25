@@ -49,6 +49,7 @@ fun SplashScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
+        viewModel.sendEvent(SplashContract.SplashUiEvent.LoadIsLogin)
         delay(2500)
         if (state.isLogin) {
             onNavigateToHome()
