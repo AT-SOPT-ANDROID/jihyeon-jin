@@ -19,25 +19,25 @@ enum class MainTab(
         descriptionResId = R.string.bottom_navigation_bar_item_home,
         route = MainTabRoute.Home,
     ),
-    Shorts(
+    SHORTS(
         defaultIconResId = R.drawable.ic_shorts_default,
         selectIconResId =  R.drawable.ic_shorts_select,
         descriptionResId = R.string.bottom_navigation_bar_item_shorts,
         MainTabRoute.Shorts
     ),
-    Live(
+    LIVE(
         defaultIconResId = R.drawable.ic_live,
         selectIconResId =  R.drawable.ic_live,
         descriptionResId = R.string.bottom_navigation_bar_item_live,
         MainTabRoute.Live,
     ),
-    Search(
+    SEARCH(
         defaultIconResId = R.drawable.ic_search,
         selectIconResId =  R.drawable.ic_search,
         descriptionResId = R.string.bottom_navigation_bar_item_search,
         MainTabRoute.Search,
     ),
-    History(
+    HISTORY(
         defaultIconResId = R.drawable.ic_history,
         selectIconResId =  R.drawable.ic_history,
         descriptionResId = R.string.bottom_navigation_bar_item_history,
