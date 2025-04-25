@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -39,8 +40,19 @@ enum class SignUpStep {
 }
 
 @Composable
+fun SignUpRoute(
+    padding: PaddingValues,
+    onNavigateToSignIn: (String, String) -> Unit = { _, _ -> }
+) {
+    SignUpScreen(
+        padding = padding,
+        onNextButtonClick = onNavigateToSignIn
+    )
+}
+
+@Composable
 fun SignUpScreen(
-    modifier: Modifier = Modifier,
+    padding: PaddingValues,
     onNextButtonClick: (String, String) -> Unit = { _, _ -> },
 ) {
     var step by remember { mutableStateOf(SignUpStep.ID) }
@@ -65,7 +77,8 @@ fun SignUpScreen(
     val context = LocalContext.current
 
     Column(
-        modifier = modifier
+        modifier = Modifier
+            .padding(padding)
             .fillMaxSize()
     ) {
         BackButtonTopBar(
@@ -163,6 +176,8 @@ fun SignUpScreen(
 @Composable
 private fun PreviewSignUpScreen() {
     Column(Modifier.background(Black)) {
-        SignUpScreen()
+        SignUpScreen(
+            padding = PaddingValues(0.dp)
+        )
     }
 }
