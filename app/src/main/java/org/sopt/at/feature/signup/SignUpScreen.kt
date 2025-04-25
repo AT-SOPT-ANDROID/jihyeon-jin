@@ -41,10 +41,12 @@ enum class SignUpStep {
 @Composable
 fun SignUpRoute(
     modifier: Modifier,
+    popBackStack: () -> Unit,
     onNavigateToSignIn: (String, String) -> Unit
 ) {
     SignUpScreen(
         modifier = modifier,
+        onBackButtonPress = popBackStack,
         onNextButtonClick = onNavigateToSignIn
     )
 }
@@ -52,7 +54,8 @@ fun SignUpRoute(
 @Composable
 fun SignUpScreen(
     modifier: Modifier = Modifier,
-    onNextButtonClick: (String, String) -> Unit = { _, _ -> },
+    onBackButtonPress: () -> Unit,
+    onNextButtonClick: (String, String) -> Unit,
 ) {
     var step by remember { mutableStateOf(SignUpStep.ID) }
     var id by remember { mutableStateOf("") }
@@ -80,8 +83,7 @@ fun SignUpScreen(
             .fillMaxSize()
     ) {
         BackButtonTopBar(
-            onBackButtonPress = { // TODO: 뒤로가기
-            }
+            onBackButtonPress = onBackButtonPress
         )
         Column(
             modifier = Modifier
@@ -174,6 +176,9 @@ fun SignUpScreen(
 @Composable
 private fun PreviewSignUpScreen() {
     Column(Modifier.background(Black)) {
-        SignUpScreen()
+        SignUpScreen(
+            onBackButtonPress = {},
+            onNextButtonClick = { _, _ -> }
+        )
     }
 }

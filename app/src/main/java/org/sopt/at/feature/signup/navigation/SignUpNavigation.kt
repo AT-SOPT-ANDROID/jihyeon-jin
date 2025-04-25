@@ -12,11 +12,13 @@ fun NavController.navigateToSignUp() {
 }
 fun NavGraphBuilder.signUpNavGraph(
     modifier: Modifier = Modifier,
+    popBackStack: () -> Unit,
     onNavigateToSignIn: (String, String) -> Unit
 ) {
     composable<Route.SignUp> {
         SignUpRoute(
             modifier = modifier,
+            popBackStack = popBackStack,
             onNavigateToSignIn = onNavigateToSignIn
         )
     }

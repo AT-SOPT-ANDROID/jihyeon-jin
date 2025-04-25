@@ -45,6 +45,7 @@ fun MainNavHost(
                 onNavigateToSignUp = navigator::navigateToSignUp
             )
             signUpNavGraph(
+                popBackStack = navigator::popBackStack,
                 onNavigateToSignIn = { email, password ->
                     navigator.navigateToSignIn(email, password)
                 }
