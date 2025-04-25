@@ -1,20 +1,16 @@
 package org.sopt.at.feature.main
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.LayoutDirection
 import kotlinx.collections.immutable.toPersistentList
 import org.sopt.at.feature.main.component.MainBottomBar
 import org.sopt.at.ui.theme.Black
@@ -31,7 +27,6 @@ fun MainScreen(
     )
 }
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun MainScreenContent(
     modifier: Modifier = Modifier,
@@ -46,11 +41,8 @@ private fun MainScreenContent(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Black)
-                    .padding(
-                        start = innerPadding.calculateStartPadding(LayoutDirection.Ltr),
-                        end = innerPadding.calculateEndPadding(LayoutDirection.Ltr)
-                    )
-                    .systemBarsPadding()
+                    .statusBarsPadding()
+                    .padding(bottom = innerPadding.calculateBottomPadding())
             )
         },
         bottomBar = {
