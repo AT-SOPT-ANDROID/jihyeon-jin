@@ -7,7 +7,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import org.sopt.at.core.navigation.MainTabRoute
 import org.sopt.at.feature.live.LiveRoute
-import org.sopt.at.feature.live.LiveScreen
 
 fun NavController.navigateToLive(navOptions: NavOptions) {
     navigate(MainTabRoute.Live, navOptions)

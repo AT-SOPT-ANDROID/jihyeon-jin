@@ -7,7 +7,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import org.sopt.at.core.navigation.MainTabRoute
 import org.sopt.at.feature.history.HistoryRoute
-import org.sopt.at.feature.history.HistoryScreen
 
 fun NavController.navigateToHistory(navOptions: NavOptions) {
     navigate(MainTabRoute.History, navOptions)
