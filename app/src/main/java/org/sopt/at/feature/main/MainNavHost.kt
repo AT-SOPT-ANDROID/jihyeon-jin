@@ -1,6 +1,7 @@
 package org.sopt.at.feature.main
 
-import android.annotation.SuppressLint
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +19,6 @@ import org.sopt.at.feature.signup.navigation.signUpNavGraph
 import org.sopt.at.feature.splash.navigation.splashNavGraph
 import org.sopt.at.ui.theme.Black
 
-@SuppressLint("UnrememberedGetBackStackEntry")
 @Composable
 fun MainNavHost(
     modifier: Modifier = Modifier,
@@ -32,6 +32,18 @@ fun MainNavHost(
         NavHost(
             navController = navigator.navController,
             startDestination = navigator.startDestination,
+            enterTransition = {
+                EnterTransition.None
+            },
+            exitTransition = {
+                ExitTransition.None
+            },
+            popEnterTransition = {
+                EnterTransition.None
+            },
+            popExitTransition = {
+                ExitTransition.None
+            }
         ) {
             homeNavGraph(
                 onNavigateToMyPage = navigator::navigateToMyPage,
