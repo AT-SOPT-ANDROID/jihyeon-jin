@@ -39,7 +39,6 @@ import kotlinx.collections.immutable.toPersistentList
 import org.sopt.at.feature.main.MainTab
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
 import org.sopt.at.ui.theme.Black
-import org.sopt.at.ui.theme.Gray3
 import org.sopt.at.ui.theme.Gray4
 import org.sopt.at.ui.theme.White
 
@@ -56,7 +55,7 @@ fun MainBottomBar(
         enter = fadeIn() + slideIn { IntOffset(0, it.height) },
         exit = fadeOut() + slideOut { IntOffset(0, it.height) }
     ) {
-        val borderColor = Gray3
+        val borderColor = Gray4
         Row(
             modifier = modifier
                 .fillMaxWidth()
