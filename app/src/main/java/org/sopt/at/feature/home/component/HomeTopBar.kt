@@ -11,7 +11,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -38,10 +37,10 @@ fun HomeTopBar(
         },
         actions = {
             IconButton(onClick = onLiveButtonClick) {
-                Image(
-                    painter = painterResource(R.drawable.ic_connect),
+                Icon(
+                    imageVector = ImageVector.vectorResource(R.drawable.ic_connect),
                     contentDescription = stringResource(R.string.image_cennect),
-                    colorFilter = ColorFilter.tint(White),
+                    tint = White,
                     modifier = Modifier.size(28.dp)
                 )
             }
