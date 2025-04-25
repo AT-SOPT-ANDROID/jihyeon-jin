@@ -26,12 +26,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -41,7 +39,7 @@ import kotlinx.collections.immutable.toPersistentList
 import org.sopt.at.feature.main.MainTab
 import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
 import org.sopt.at.ui.theme.Black
-import org.sopt.at.ui.theme.Gray2
+import org.sopt.at.ui.theme.Gray3
 import org.sopt.at.ui.theme.Gray4
 import org.sopt.at.ui.theme.White
 
@@ -58,7 +56,7 @@ fun MainBottomBar(
         enter = fadeIn() + slideIn { IntOffset(0, it.height) },
         exit = fadeOut() + slideOut { IntOffset(0, it.height) }
     ) {
-        val borderColor = Gray2
+        val borderColor = Gray3
         Row(
             modifier = modifier
                 .fillMaxWidth()
