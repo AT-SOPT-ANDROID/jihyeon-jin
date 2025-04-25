@@ -1,6 +1,5 @@
 package org.sopt.at.feature.signup.navigation
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
