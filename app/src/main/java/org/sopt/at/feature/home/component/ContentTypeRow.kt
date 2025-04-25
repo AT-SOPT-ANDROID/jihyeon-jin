@@ -33,7 +33,9 @@ fun ContentTypeRow(
                 text = stringResource(contentType.titleResId),
                 fontSize = 18.sp,
                 fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
-                color = if (isSelected) White else Gray3
+                color = if (selectedContentType == null) White
+                    else if(isSelected) White
+                    else Gray3
             )
         }
     }

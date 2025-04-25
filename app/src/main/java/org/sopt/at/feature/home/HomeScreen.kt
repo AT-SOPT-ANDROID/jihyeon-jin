@@ -1,8 +1,8 @@
 package org.sopt.at.feature.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -53,7 +53,6 @@ fun HomeScreen(
 
     LazyColumn(
         modifier = modifier.padding(padding),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
             HomeTopBar(
@@ -70,7 +69,7 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Black)
-                    .padding(8.dp),
+                    .padding(16.dp),
                 onContentTypeSelected = { contentType ->
                     onContentTypeSelected(contentType)
                     viewModel.sendEvent(
@@ -88,6 +87,7 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .height(450.dp)
             )
+            Spacer(Modifier.height(16.dp))
         }
 
         item {
@@ -95,6 +95,7 @@ fun HomeScreen(
                 program = homeState.commonPrograms,
                 onContentClicked = { }
             )
+            Spacer(Modifier.height(16.dp))
         }
 
         item {
@@ -103,6 +104,7 @@ fun HomeScreen(
                 programLists = homeState.rankingPrograms,
                 onContentClicked = { }
             )
+            Spacer(Modifier.height(16.dp))
         }
     }
 }

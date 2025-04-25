@@ -32,7 +32,7 @@ fun HomeTopBar(
                 imageVector = ImageVector.vectorResource(R.drawable.logo_tiving),
                 contentDescription = stringResource(R.string.app_name),
                 tint = Color.Unspecified,
-                modifier = Modifier.height(56.dp)
+                modifier = Modifier.height(48.dp)
             )
         },
         actions = {
@@ -56,6 +56,6 @@ fun HomeTopBar(
             containerColor = Black,
             titleContentColor = White
         ),
-        modifier = Modifier.height(56.dp)
+        modifier = Modifier.height(48.dp)
     )
 }
