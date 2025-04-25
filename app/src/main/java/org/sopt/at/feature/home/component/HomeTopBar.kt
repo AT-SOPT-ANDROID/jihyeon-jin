@@ -1,0 +1,62 @@
+package org.sopt.at.feature.home.component
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.unit.dp
+import org.sopt.at.R
+import org.sopt.at.ui.theme.Black
+import org.sopt.at.ui.theme.White
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HomeTopBar(
+    onLiveButtonClick: () -> Unit,
+    onProfileButtonClick: () -> Unit
+) {
+    TopAppBar(
+        title = {
+            Icon(
+                imageVector = ImageVector.vectorResource(R.drawable.logo_tiving),
+                contentDescription = stringResource(R.string.app_name),
+                tint = Color.Unspecified,
+                modifier = Modifier.height(56.dp)
+            )
+        },
+        actions = {
+            IconButton(onClick = onLiveButtonClick) {
+                Image(
+                    painter = painterResource(R.drawable.ic_connect),
+                    contentDescription = stringResource(R.string.image_cennect),
+                    colorFilter = ColorFilter.tint(White),
+                    modifier = Modifier.size(28.dp)
+                )
+            }
+            IconButton(onClick = onProfileButtonClick) {
+                Image(
+                    painter = painterResource(R.drawable.image_profile),
+                    contentDescription = stringResource(R.string.image_profile),
+                    modifier = Modifier.size(28.dp)
+                )
+            }
+        },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = Black,
+            titleContentColor = White
+        ),
+        modifier = Modifier.height(56.dp)
+    )
+}
