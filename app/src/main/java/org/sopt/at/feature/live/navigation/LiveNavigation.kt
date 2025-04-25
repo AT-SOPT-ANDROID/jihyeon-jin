@@ -6,6 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import org.sopt.at.core.navigation.MainTabRoute
+import org.sopt.at.feature.live.LiveRoute
 import org.sopt.at.feature.live.LiveScreen
 
 fun NavController.navigateToLive(navOptions: NavOptions) {
@@ -15,7 +16,7 @@ fun NavGraphBuilder.liveNavGraph(
     padding: PaddingValues
 ) {
     composable<MainTabRoute.Live> {
-        LiveScreen(
+        LiveRoute(
             padding = padding
         )
     }

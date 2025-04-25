@@ -6,6 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import org.sopt.at.core.navigation.MainTabRoute
+import org.sopt.at.feature.history.HistoryRoute
 import org.sopt.at.feature.history.HistoryScreen
 
 fun NavController.navigateToHistory(navOptions: NavOptions) {
@@ -15,7 +16,7 @@ fun NavGraphBuilder.historyNavGraph(
     padding: PaddingValues
 ) {
     composable<MainTabRoute.History> {
-        HistoryScreen(
+        HistoryRoute(
             padding = padding
         )
     }
