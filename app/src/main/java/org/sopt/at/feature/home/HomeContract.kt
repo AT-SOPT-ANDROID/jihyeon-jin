@@ -1,6 +1,6 @@
 package org.sopt.at.feature.home
 
-import org.sopt.at.core.type.ContentType
+import org.sopt.at.domain.model.ContentCategory
 import org.sopt.at.domain.model.HomeRecommendation
 import org.sopt.at.feature.util.UiEffect
 import org.sopt.at.feature.util.UiEvent
@@ -22,11 +22,24 @@ class HomeContract {
             title = "오늘의 티빙 TOP 20",
             programList = emptyList()
         ),
-        val selectedContentType: ContentType? = null
+        val filteredMainPrograms: HomeRecommendation = HomeRecommendation(
+            title = "",
+            programList = listOf()
+        ),
+        val filteredCommonPrograms: HomeRecommendation = HomeRecommendation(
+            title = "",
+            programList = listOf()
+        ),
+        val filteredRankingPrograms: HomeRecommendation = HomeRecommendation(
+            title = "",
+            programList = listOf()
+        ),
+        val selectedContentCategory: ContentCategory = ContentCategory.ALL
     ) : UiState
 
     sealed class HomeUiEvent : UiEvent {
-        data class SetContentType(val contentType: ContentType) : HomeUiEvent()
+        data object GetDummyHomeContent : HomeUiEvent()
+        data class SetContentCategory(val contentCategory: ContentCategory) : HomeUiEvent()
     }
 
     sealed class HomeUiEffect : UiEffect

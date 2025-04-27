@@ -17,12 +17,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import org.sopt.at.R
+import org.sopt.at.core.extension.noRippleClickable
 import org.sopt.at.ui.theme.Black
 import org.sopt.at.ui.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeTopBar(
+    onLogoClick: () -> Unit,
     onLiveButtonClick: () -> Unit,
     onProfileButtonClick: () -> Unit
 ) {
@@ -33,6 +35,7 @@ fun HomeTopBar(
                 contentDescription = stringResource(R.string.app_name),
                 tint = Color.Unspecified,
                 modifier = Modifier.height(48.dp)
+                    .noRippleClickable(onLogoClick)
             )
         },
         actions = {

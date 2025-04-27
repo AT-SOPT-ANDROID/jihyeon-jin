@@ -13,47 +13,53 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import org.sopt.at.core.type.ContentType
+import org.sopt.at.domain.model.ContentCategory
 import org.sopt.at.feature.home.component.BannerPager
 import org.sopt.at.feature.home.component.CommonProgramHorizontalColumn
-import org.sopt.at.feature.home.component.ContentTypeRow
+import org.sopt.at.feature.home.component.ContentCategoryRow
 import org.sopt.at.feature.home.component.HomeTopBar
 import org.sopt.at.feature.home.component.RankingProgramHorizontalColumn
 import org.sopt.at.ui.theme.Black
+import org.sopt.at.feature.home.HomeContract.HomeUiState
+import org.sopt.at.feature.home.HomeContract.HomeUiEvent
 
 @Composable
 fun HomeRoute(
     onNavigateToMyPage: () -> Unit,
-    onContentTypeSelected: (ContentType) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
+    val homeState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        viewModel.sendEvent(HomeUiEvent.GetDummyHomeContent)
+    }
+
     HomeScreen(
         onNavigateToMyPage = onNavigateToMyPage,
-        onContentTypeSelected = onContentTypeSelected,
         modifier = modifier,
-        viewModel = viewModel
+        homeState = homeState,
+        onCategorySelected = { contentCategory ->
+            viewModel.sendEvent(HomeUiEvent.SetContentCategory(contentCategory))
+        }
     )
 }
 
 @Composable
 fun HomeScreen(
     onNavigateToMyPage: () -> Unit,
-    onContentTypeSelected: (ContentType) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = hiltViewModel()
+    homeState: HomeUiState,
+    onCategorySelected: (ContentCategory) -> Unit
 ) {
-    val homeState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    LaunchedEffect(Unit) {
-        viewModel.getDummyHomeContent()
-    }
-
     LazyColumn(
         modifier = modifier
     ) {
         item {
             HomeTopBar(
+                onLogoClick = {
+                    onCategorySelected(ContentCategory.ALL)
+                },
                 onLiveButtonClick = {
                     // TODO: 무선 연결 안내
                 },
@@ -63,24 +69,21 @@ fun HomeScreen(
             )
         }
         stickyHeader {
-            ContentTypeRow(
+            ContentCategoryRow(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Black)
                     .padding(16.dp),
-                onContentTypeSelected = { contentType ->
-                    onContentTypeSelected(contentType)
-                    viewModel.sendEvent(
-                        HomeContract.HomeUiEvent.SetContentType(contentType)
-                    )
+                onContentCategorySelected = { contentCategory ->
+                    onCategorySelected(contentCategory)
                 },
-                selectedContentType = homeState.selectedContentType
+                selectedContentCategory = homeState.selectedContentCategory
             )
         }
 
         item {
             BannerPager(
-                programList = homeState.mainPrograms.programList,
+                programList = homeState.filteredMainPrograms.programList,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(450.dp)
@@ -90,7 +93,7 @@ fun HomeScreen(
 
         item {
             CommonProgramHorizontalColumn(
-                program = homeState.commonPrograms,
+                program = homeState.filteredCommonPrograms,
                 onContentClicked = { }
             )
             Spacer(Modifier.height(16.dp))
@@ -99,7 +102,7 @@ fun HomeScreen(
         item {
             RankingProgramHorizontalColumn(
                 modifier = Modifier.fillMaxWidth(),
-                programLists = homeState.rankingPrograms,
+                programLists = homeState.filteredRankingPrograms,
                 onContentClicked = { }
             )
             Spacer(Modifier.height(16.dp))

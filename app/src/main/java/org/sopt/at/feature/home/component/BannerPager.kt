@@ -26,6 +26,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.sopt.at.R
+import org.sopt.at.domain.model.ContentCategory
 import org.sopt.at.domain.model.Program
 
 @Composable
@@ -95,11 +96,11 @@ fun AutoScrollEffect(pagerState: PagerState) {
 private fun BannerPagerPreview() {
     BannerPager(
         programList = listOf(
-            Program("", R.drawable.img_program_shin_byeong),
-            Program("", R.drawable.img_program_camp),
-            Program("", R.drawable.img_program_bunny),
-            Program("", R.drawable.img_program_ehon),
-            Program("", R.drawable.img_program_im_solo)
+            Program("", R.drawable.img_program_shin_byeong, ContentCategory.ALL),
+            Program("", R.drawable.img_program_camp, ContentCategory.ALL),
+            Program("", R.drawable.img_program_bunny, ContentCategory.ALL),
+            Program("", R.drawable.img_program_ehon, ContentCategory.ALL),
+            Program("", R.drawable.img_program_im_solo, ContentCategory.ALL)
         )
     )
 }

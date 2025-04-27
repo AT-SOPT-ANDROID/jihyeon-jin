@@ -24,10 +24,10 @@ abstract class BaseViewModel<State: UiState, Event: UiEvent, Effect: UiEffect>(
 
     val uiState = _uiState.asStateFlow()
 
-    private val _event: MutableSharedFlow<Event> = MutableSharedFlow()
+    private val _event: MutableSharedFlow<Event> = MutableSharedFlow(replay = 0)
     val event = _event.asSharedFlow()
 
-    private val _effect: Channel<Effect> = Channel()
+    private val _effect: Channel<Effect> = Channel(Channel.BUFFERED)
     val effect = _effect.receiveAsFlow()
 
     init {

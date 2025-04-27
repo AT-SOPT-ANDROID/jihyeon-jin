@@ -16,6 +16,7 @@
     <string name="splash_logo">splash_logo</string>
 
     <!-- Content Type -->
+    <string name="type_all">전체</string>
     <string name="type_drama">드라마</string>
     <string name="type_entertainment">예능</string>
     <string name="type_movie">영화</string>

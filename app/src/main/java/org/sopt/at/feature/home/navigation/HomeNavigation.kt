@@ -18,7 +18,6 @@ fun NavGraphBuilder.homeNavGraph(
     composable<MainTabRoute.Home> {
         HomeRoute(
             onNavigateToMyPage = onNavigateToMyPage,
-            onContentTypeSelected = {},
             modifier = modifier
         )
     }
