@@ -7,21 +7,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.sopt.at.domain.model.ContentCategory
+import org.sopt.at.feature.home.HomeContract.HomeUiEvent
+import org.sopt.at.feature.home.HomeContract.HomeUiState
 import org.sopt.at.feature.home.component.BannerPager
 import org.sopt.at.feature.home.component.CommonProgramHorizontalColumn
 import org.sopt.at.feature.home.component.ContentCategoryRow
 import org.sopt.at.feature.home.component.HomeTopBar
 import org.sopt.at.feature.home.component.RankingProgramHorizontalColumn
 import org.sopt.at.ui.theme.Black
-import org.sopt.at.feature.home.HomeContract.HomeUiState
-import org.sopt.at.feature.home.HomeContract.HomeUiEvent
 
 @Composable
 fun HomeRoute(
@@ -30,10 +29,6 @@ fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val homeState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    LaunchedEffect(Unit) {
-        viewModel.sendEvent(HomeUiEvent.GetDummyHomeContent)
-    }
 
     HomeScreen(
         onNavigateToMyPage = onNavigateToMyPage,

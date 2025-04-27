@@ -15,6 +15,9 @@ class HomeViewModel @Inject constructor(
     private val dummyHomeProgramRepository: DummyHomeProgramRepository
 ) : BaseViewModel<HomeUiState, HomeUiEvent, HomeUiEffect>(HomeUiState()) {
 
+    init {
+        sendEvent(HomeUiEvent.GetDummyHomeContent)
+    }
 
     override fun reduceState(event: HomeUiEvent) {
         when (event) {
