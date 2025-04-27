@@ -44,26 +44,24 @@ fun BannerPager(
     }
 
     HorizontalPager(
-    state = pagerState,
-    beyondViewportPageCount = 1,
-    modifier = modifier.height(450.dp),
-    contentPadding = PaddingValues(horizontal = 24.dp),
-    pageSpacing = 12.dp
+        state = pagerState,
+        beyondViewportPageCount = 1,
+        modifier = modifier.height(450.dp),
+        contentPadding = PaddingValues(horizontal = 24.dp),
+        pageSpacing = 12.dp
     ) { page ->
         Box(
             contentAlignment = Alignment.BottomEnd
         ) {
-            if (programList.isNotEmpty()) {
-                Image(
-                    painter = painterResource(programList[page % programList.size].imgRes),
-                    contentDescription = programList[page % programList.size].title,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(RoundedCornerShape(10.dp)),
-                    contentScale = ContentScale.FillWidth,
-                    alignment = Alignment.BottomCenter
-                )
-            }
+            Image(
+                painter = painterResource(programList[page % programList.size].imgRes),
+                contentDescription = programList[page % programList.size].title,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(10.dp)),
+                contentScale = ContentScale.FillWidth,
+                alignment = Alignment.BottomCenter
+            )
         }
     }
 }
