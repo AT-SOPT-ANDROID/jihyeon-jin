@@ -77,13 +77,15 @@ private fun HomeScreen(
         }
 
         item {
-            BannerPager(
-                programList = homeState.filteredMainPrograms.programList,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(450.dp)
-            )
-            Spacer(Modifier.height(16.dp))
+            if(homeState.filteredMainPrograms.programList.isNotEmpty()) {
+                BannerPager(
+                    programList = homeState.filteredMainPrograms.programList,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(450.dp)
+                )
+                Spacer(Modifier.height(16.dp))
+            }
         }
 
         item {
