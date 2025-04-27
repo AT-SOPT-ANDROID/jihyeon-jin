@@ -41,7 +41,7 @@ fun HomeRoute(
 }
 
 @Composable
-fun HomeScreen(
+private fun HomeScreen(
     onNavigateToMyPage: () -> Unit,
     modifier: Modifier = Modifier,
     homeState: HomeUiState,
