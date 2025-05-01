@@ -3,32 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".TivingApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_main"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ATSOPTANDROID"
         tools:targetApi="31">
         <activity
-            android:name=".feature.my.MyPageActivity"
-            android:exported="false"
-            android:label="@string/title_activity_my_page"
-            android:theme="@style/Theme.ATSOPTANDROID" />
-        <activity
-            android:name=".feature.signin.SignInActivity"
-            android:exported="false"
-            android:label="@string/title_activity_sign_in"
-            android:theme="@style/Theme.ATSOPTANDROID" />
-        <activity
-            android:name=".feature.signup.SignUpActivity"
-            android:exported="false"
-            android:label="@string/title_activity_sign_up"
-            android:theme="@style/Theme.ATSOPTANDROID" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".feature.main.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.ATSOPTANDROID">

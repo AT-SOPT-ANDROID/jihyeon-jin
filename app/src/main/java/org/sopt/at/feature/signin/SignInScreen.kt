@@ -25,10 +25,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.sopt.at.core.component.BackButtonTopBar
 import org.sopt.at.core.component.TivingCommonPasswordField
 import org.sopt.at.core.component.TivingCommonTextField
 import org.sopt.at.core.extension.noRippleClickable
+import org.sopt.at.core.utils.SnackBarUtils
+import org.sopt.at.feature.signin.viewmodel.SignInViewModel
 import org.sopt.at.ui.theme.Black
 import org.sopt.at.ui.theme.Gray1
 import org.sopt.at.ui.theme.Gray2
@@ -37,10 +43,31 @@ import org.sopt.at.ui.theme.TivingPrimary
 import org.sopt.at.ui.theme.White
 
 @Composable
-fun SignInScreen(
+fun SignInRoute(
+    userInputEmail: String,
+    userInputPassword: String,
+    onNavigateToHome: () -> Unit,
+    onNavigateToSignUp: () -> Unit,
     modifier: Modifier = Modifier,
-    onLoginButtonClick: (String, String) -> Unit = { _, _ ->},
-    onSignUpButtonClick: () -> Unit = {},
+    viewModel: SignInViewModel = hiltViewModel()
+) {
+    SignInScreen(
+        userInputEmail = userInputEmail,
+        userInputPassword = userInputPassword,
+        onLoginButtonClick = onNavigateToHome,
+        onSignUpButtonClick = onNavigateToSignUp,
+        modifier = modifier,
+        viewModel = viewModel
+    )
+}
+@Composable
+fun SignInScreen(
+    userInputEmail: String,
+    userInputPassword: String,
+    onLoginButtonClick: () -> Unit,
+    onSignUpButtonClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: SignInViewModel = hiltViewModel()
 ) {
     var id by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -96,13 +123,33 @@ fun SignInScreen(
                     )
                     .padding(14.dp)
                     .noRippleClickable {
-                        onLoginButtonClick(id, password)
+                        if (userInputEmail.isNotEmpty() &&
+                            userInputPassword.isNotEmpty() &&
+                            userInputEmail == id &&
+                            userInputPassword == password
+                        ) {
+                            viewModel.sendEvent(
+                                SignInContract.SignInUiEvent.SaveLoginInfo(
+                                    userInputEmail,
+                                    userInputPassword
+                                )
+                            )
+                            onLoginButtonClick()
+                        } else {
+                            CoroutineScope(Dispatchers.Main).launch {
+                                SnackBarUtils.showSnackBar(
+                                    message = "아이디 또는 비밀번호가 일치하지 않습니다.",
+                                    actionLabel = "닫기"
+                                )
+                            }
+                        }
                     }
 
             )
             Spacer(Modifier.height(20.dp))
             Row(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .wrapContentHeight(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
@@ -139,6 +186,11 @@ fun SignInScreen(
 @Composable
 private fun PreviewSignInScreen() {
     Column(Modifier.background(Black)) {
-        SignInScreen()
+        SignInScreen(
+            userInputEmail = "",
+            userInputPassword = "",
+            onLoginButtonClick = { },
+            onSignUpButtonClick = { }
+        )
     }
 }

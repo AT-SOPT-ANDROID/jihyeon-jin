@@ -1,0 +1,25 @@
+package org.sopt.at.feature.shorts
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import org.sopt.at.ui.theme.Black
+
+@Composable
+fun ShortsRoute(
+    modifier: Modifier = Modifier
+) {
+    ShortsScreen(
+        modifier = modifier
+    )
+}
+@Composable
+fun ShortsScreen(
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .background(Black)
+    ) { }
+}

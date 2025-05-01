@@ -1,6 +1,30 @@
 <resources>
-    <string name="app_name">AT SOPT ANDROID</string>
+    <string name="app_name">티빙</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="title_activity_sign_in">SignInActivity</string>
     <string name="title_activity_my_page">MyPageActivity</string>
+
+
+    <!-- BottomNavigation -->
+    <string name="bottom_navigation_bar_item_home">홈</string>
+    <string name="bottom_navigation_bar_item_shorts">쇼츠</string>
+    <string name="bottom_navigation_bar_item_live">라이브</string>
+    <string name="bottom_navigation_bar_item_search">검색</string>
+    <string name="bottom_navigation_bar_item_history">기록</string>
+
+    <!-- Splash -->
+    <string name="splash_logo">splash_logo</string>
+
+    <!-- Content Type -->
+    <string name="type_all">전체</string>
+    <string name="type_drama">드라마</string>
+    <string name="type_entertainment">예능</string>
+    <string name="type_movie">영화</string>
+    <string name="type_sports">스포츠</string>
+    <string name="type_animation">애니</string>
+    <string name="type_news">뉴스</string>
+
+    <!-- Image Description -->
+    <string name="image_cennect">무선 연결</string>
+    <string name="image_profile">내 프로필</string>
 </resources>
