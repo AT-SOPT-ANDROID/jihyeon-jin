@@ -13,15 +13,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import org.sopt.at.ui.theme.Gray3
-import org.sopt.at.ui.theme.Gray4
+import org.sopt.at.ui.theme.TivingTheme.colors
+import org.sopt.at.ui.theme.TivingTheme.typography
 
 @Composable
 fun TivingCommonTextField(
@@ -35,7 +32,7 @@ fun TivingCommonTextField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        textStyle = TextStyle(color = White, fontSize = 16.sp),
+        textStyle = typography.body.merge(colors.basicWhite),
         decorationBox = { innerTextField ->
             Box(
                 modifier = Modifier
@@ -43,7 +40,10 @@ fun TivingCommonTextField(
                     .padding(14.dp)
             ) {
                 if (value.isEmpty()) {
-                    Text(text = hint, color = Gray3, fontSize = 16.sp)
+                    Text(
+                        text = hint,
+                        style = typography.body.merge(colors.gray03)
+                    )
                 }
                 innerTextField()
 
@@ -63,7 +63,7 @@ fun TivingCommonTextField(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                color = Gray4,
+                color = colors.gray04,
                 shape = RoundedCornerShape(7.dp),
             )
             .height(48.dp)

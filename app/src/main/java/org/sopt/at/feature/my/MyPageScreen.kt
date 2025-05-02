@@ -11,7 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.sopt.at.feature.my.viewmodel.MyPageViewModel
-import org.sopt.at.ui.theme.White
+import org.sopt.at.ui.theme.TivingTheme.colors
+import org.sopt.at.ui.theme.TivingTheme.typography
 
 @Composable
 fun MyPageRoute(
@@ -42,7 +43,7 @@ fun MyPageScreen(
     ) {
         Text(
             text = state.id,
-            color = White
+            style = typography.body.merge(colors.basicWhite),
         )
 
         Button(
@@ -51,7 +52,10 @@ fun MyPageScreen(
                 onLogOutButtonClick("", "")
             }
         ) {
-            Text("로그아웃")
+            Text(
+                text = "로그아웃",
+                style = typography.button.merge(colors.basicWhite),
+            )
         }
     }
 

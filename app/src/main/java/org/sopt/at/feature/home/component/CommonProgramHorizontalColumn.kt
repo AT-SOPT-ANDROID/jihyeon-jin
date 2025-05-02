@@ -17,13 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import org.sopt.at.domain.model.HomeRecommendation
 import org.sopt.at.domain.model.Program
 import org.sopt.at.feature.home.component.item.CommonProgramItem
-import org.sopt.at.ui.theme.White
+import org.sopt.at.ui.theme.TivingTheme.colors
+import org.sopt.at.ui.theme.TivingTheme.typography
 
 @SuppressLint("ConfigurationScreenWidthHeight")
 @Composable
@@ -45,9 +44,7 @@ fun CommonProgramHorizontalColumn(
         ) {
             Text(
                 text = program.title,
-                fontSize = 18.sp,
-                color = White,
-                fontWeight = FontWeight.Bold
+                style = typography.subTitle.merge(colors.basicWhite),
             )
             Spacer(modifier = Modifier.weight(1f))
         }

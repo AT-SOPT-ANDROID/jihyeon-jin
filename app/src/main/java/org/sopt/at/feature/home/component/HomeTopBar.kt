@@ -18,8 +18,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import org.sopt.at.R
 import org.sopt.at.core.extension.noRippleClickable
-import org.sopt.at.ui.theme.Black
-import org.sopt.at.ui.theme.White
+import org.sopt.at.ui.theme.TivingTheme.colors
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,7 +42,7 @@ fun HomeTopBar(
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.ic_cast),
                     contentDescription = stringResource(R.string.image_cennect),
-                    tint = White,
+                    tint = colors.basicWhite,
                     modifier = Modifier.size(28.dp)
                 )
             }
@@ -56,8 +55,8 @@ fun HomeTopBar(
             }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Black,
-            titleContentColor = White
+            containerColor = colors.basicBlack,
+            titleContentColor = colors.basicWhite
         ),
         modifier = Modifier.height(48.dp)
     )

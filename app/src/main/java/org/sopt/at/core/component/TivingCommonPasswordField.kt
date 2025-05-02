@@ -26,17 +26,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import org.sopt.at.R
-import org.sopt.at.ui.theme.Gray3
-import org.sopt.at.ui.theme.Gray4
-import org.sopt.at.ui.theme.White
+import org.sopt.at.ui.theme.TivingTheme.colors
+import org.sopt.at.ui.theme.TivingTheme.typography
 
 @Composable
 fun TivingCommonPasswordField(
@@ -53,8 +50,8 @@ fun TivingCommonPasswordField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        cursorBrush = SolidColor(White),
-        textStyle = TextStyle(color = White, fontSize = 16.sp),
+        cursorBrush = SolidColor(colors.basicWhite),
+        textStyle = typography.body.merge(colors.basicWhite),
         visualTransformation = if (!passwordVisible) PasswordVisualTransformation()
         else VisualTransformation.None,
         decorationBox = { innerTextField ->
@@ -64,7 +61,10 @@ fun TivingCommonPasswordField(
                     .padding(14.dp)
             ) {
                 if (value.isEmpty()) {
-                    Text(text = hint, color = Gray3, fontSize = 16.sp)
+                    Text(
+                        text = hint,
+                        style = typography.body.merge(colors.gray03)
+                    )
                 }
                 innerTextField()
                 Icon(
@@ -90,7 +90,7 @@ fun TivingCommonPasswordField(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                color = Gray4,
+                color = colors.gray04,
                 shape = RoundedCornerShape(7.dp),
             )
             .border(

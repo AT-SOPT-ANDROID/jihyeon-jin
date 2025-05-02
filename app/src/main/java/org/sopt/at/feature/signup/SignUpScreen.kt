@@ -20,19 +20,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import org.sopt.at.core.component.BackButtonTopBar
 import org.sopt.at.core.component.TivingCommonPasswordField
 import org.sopt.at.core.component.TivingCommonTextField
 import org.sopt.at.core.extension.noRippleClickable
-import org.sopt.at.ui.theme.Black
-import org.sopt.at.ui.theme.Gray2
-import org.sopt.at.ui.theme.Gray4
-import org.sopt.at.ui.theme.White
+import org.sopt.at.ui.theme.TivingTheme.colors
+import org.sopt.at.ui.theme.TivingTheme.typography
 
 enum class SignUpStep {
     ID, PASSWORD
@@ -87,14 +83,17 @@ fun SignUpScreen(
         )
         Column(
             modifier = Modifier
-                .padding(top = 8.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
+                .padding(
+                    top = 8.dp,
+                    start = 16.dp,
+                    end = 16.dp,
+                    bottom = 16.dp
+                )
         ) {
 
             Text(
                 text = titleText,
-                color = White,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
+                style = typography.title.merge(colors.basicWhite),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -126,26 +125,27 @@ fun SignUpScreen(
                     SignUpStep.ID -> "영문 소문자 또는 영문 소문자, 숫자 조합 6~12 자리"
                     SignUpStep.PASSWORD -> "영문, 숫자, 특수문자(~!@#$%^&*) 조합 8~15 자리"
                 },
-                fontSize = 14.sp,
-                color = Gray4,
+                style = typography.caption.merge(colors.gray04)
             )
 
             Spacer(Modifier.weight(1f))
             Text(
                 text = "다음",
-                color = if (isNextEnabled) Black else Gray2,
-                fontWeight = FontWeight.Bold,
+                style = typography.button.merge(
+                    if (isNextEnabled) colors.basicBlack
+                    else colors.gray02
+                ),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .imePadding()
                     .background(
-                        color = if (isNextEnabled) White else Color.Transparent,
+                        color = if (isNextEnabled) colors.basicWhite else Color.Transparent,
                         shape = RoundedCornerShape(4.dp)
                     )
                     .border(
                         1.dp,
-                        if (isNextEnabled) Color.Transparent else Gray2,
+                        if (isNextEnabled) Color.Transparent else colors.gray02,
                         RoundedCornerShape(4.dp)
                     )
                     .padding(16.dp)
@@ -175,7 +175,7 @@ fun SignUpScreen(
 @Preview
 @Composable
 private fun PreviewSignUpScreen() {
-    Column(Modifier.background(Black)) {
+    Column(Modifier.background(colors.basicBlack)) {
         SignUpScreen(
             onBackButtonPress = {},
             onNextButtonClick = { _, _ -> }

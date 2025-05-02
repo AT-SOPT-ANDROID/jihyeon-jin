@@ -19,8 +19,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.delay
 import org.sopt.at.R
 import org.sopt.at.feature.splash.viewmodel.SplashViewModel
-import org.sopt.at.ui.theme.Black
-
+import org.sopt.at.ui.theme.TivingTheme.colors
 @Composable
 fun SplashRoute(
     onNavigateToHome: () -> Unit,
@@ -56,7 +55,7 @@ fun SplashScreen(
     }
     Column(
         modifier = modifier
-            .background(color = Black)
+            .background(color = colors.basicBlack)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center

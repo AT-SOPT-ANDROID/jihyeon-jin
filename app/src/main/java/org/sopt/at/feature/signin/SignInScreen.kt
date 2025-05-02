@@ -20,12 +20,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,65 +34,77 @@ import org.sopt.at.core.component.TivingCommonTextField
 import org.sopt.at.core.extension.noRippleClickable
 import org.sopt.at.core.utils.SnackBarUtils
 import org.sopt.at.feature.signin.viewmodel.SignInViewModel
-import org.sopt.at.ui.theme.Black
-import org.sopt.at.ui.theme.Gray1
-import org.sopt.at.ui.theme.Gray2
-import org.sopt.at.ui.theme.Gray4
-import org.sopt.at.ui.theme.TivingPrimary
-import org.sopt.at.ui.theme.White
+import org.sopt.at.ui.theme.TivingTheme.colors
+import org.sopt.at.ui.theme.TivingTheme.typography
 
 @Composable
 fun SignInRoute(
     userInputEmail: String,
     userInputPassword: String,
+    popBackStack: () -> Unit,
     onNavigateToHome: () -> Unit,
     onNavigateToSignUp: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SignInViewModel = hiltViewModel()
 ) {
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
     SignInScreen(
         userInputEmail = userInputEmail,
         userInputPassword = userInputPassword,
-        onLoginButtonClick = onNavigateToHome,
+        onBackButtonClick = popBackStack,
+        onNavigateToHome = onNavigateToHome,
         onSignUpButtonClick = onNavigateToSignUp,
-        modifier = modifier,
-        viewModel = viewModel
+        onLogin = { email, password ->
+            viewModel.sendEvent(
+                SignInContract.SignInUiEvent.SaveLoginInfo(
+                    email,
+                    password
+                )
+            )
+        },
+        state = state,
+        modifier = modifier
     )
 }
 @Composable
 fun SignInScreen(
     userInputEmail: String,
     userInputPassword: String,
-    onLoginButtonClick: () -> Unit,
+    onBackButtonClick: () -> Unit,
+    onNavigateToHome: () -> Unit,
     onSignUpButtonClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    viewModel: SignInViewModel = hiltViewModel()
+    onLogin : (String, String) -> Unit,
+    state: SignInContract.SignInUiState,
+    modifier: Modifier = Modifier
 ) {
     var id by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     val backgroundColor = if (id.isNotBlank() && password.isNotBlank())
-        TivingPrimary
+        colors.brandRed
     else
-        Gray4
+        colors.gray04
     Column(
         modifier = modifier
             .fillMaxSize()
     ) {
         BackButtonTopBar(
-            onBackButtonPress = { // TODO: 뒤로가기
-            }
+            onBackButtonPress = onBackButtonClick
         )
         Column(
             modifier = Modifier
-                .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
+                .padding(
+                    top = 0.dp,
+                    start = 16.dp,
+                    end = 16.dp,
+                    bottom = 16.dp
+                )
         ) {
             Spacer(Modifier.height(20.dp))
             Text(
                 text = "TIVING ID 로그인",
-                color = White,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp
+                color = colors.basicWhite,
+                style = typography.title.merge(colors.basicWhite),
             )
             Spacer(Modifier.height(20.dp))
             TivingCommonTextField(
@@ -112,8 +123,7 @@ fun SignInScreen(
             Spacer(Modifier.height(16.dp))
             Text(
                 text = "로그인 하기",
-                color = Gray2,
-                fontWeight = FontWeight.Bold,
+                style = typography.title.merge(colors.gray02),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -128,14 +138,10 @@ fun SignInScreen(
                             userInputEmail == id &&
                             userInputPassword == password
                         ) {
-                            viewModel.sendEvent(
-                                SignInContract.SignInUiEvent.SaveLoginInfo(
-                                    userInputEmail,
-                                    userInputPassword
-                                )
-                            )
-                            onLoginButtonClick()
+                            onLogin(userInputEmail, userInputPassword)
+                            onNavigateToHome()
                         } else {
+                            // TODO: 추후 이펙트로 빼기
                             CoroutineScope(Dispatchers.Main).launch {
                                 SnackBarUtils.showSnackBar(
                                     message = "아이디 또는 비밀번호가 일치하지 않습니다.",
@@ -156,25 +162,24 @@ fun SignInScreen(
             ) {
                 Text(
                     text = "아이디 찾기",
-                    color = Gray1,
+                    style = typography.body.merge(colors.gray01)
                 )
-                VerticalDivider(modifier = Modifier.height(16.dp), thickness = 1.dp, color = Gray1)
+                VerticalDivider(modifier = Modifier.height(16.dp), thickness = 1.dp, color = colors.gray01)
                 Text(
                     text = "비밀번호 찾기",
-                    color = Gray1,
+                    style = typography.body.merge(colors.gray01)
                 )
-                VerticalDivider(modifier = Modifier.height(16.dp), thickness = 1.dp, color = Gray1)
+                VerticalDivider(modifier = Modifier.height(16.dp), thickness = 1.dp, color = colors.gray01)
                 Text(
                     text = "회원가입",
-                    color = Gray1,
+                    style = typography.body.merge(colors.gray01),
                     modifier = Modifier.noRippleClickable(onSignUpButtonClick)
                 )
             }
             Spacer(Modifier.height(20.dp))
             Text(
                 text = "이 사이트는 Google reCAPTCHA로 보호되며,\nGoogle 개인정보 처리 방침과 서비스 약관이 적용됩니다.",
-                fontSize = 12.sp,
-                color = Gray4,
+                style = typography.caption.merge(colors.gray04),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -185,12 +190,15 @@ fun SignInScreen(
 @Preview
 @Composable
 private fun PreviewSignInScreen() {
-    Column(Modifier.background(Black)) {
+    Column(Modifier.background(colors.basicBlack)) {
         SignInScreen(
             userInputEmail = "",
             userInputPassword = "",
-            onLoginButtonClick = { },
-            onSignUpButtonClick = { }
+            onNavigateToHome = { },
+            onSignUpButtonClick = { },
+            onBackButtonClick = {},
+            onLogin = { _, _ -> },
+            state = SignInContract.SignInUiState()
         )
     }
 }
