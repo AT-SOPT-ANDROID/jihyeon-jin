@@ -12,12 +12,15 @@ class SignUpContract {
             userId = -1,
             nickname = ""
         ),
+        val loginId: String = "",
+        val password: String = "",
+        val nickname: String = "",
         val signUpSuccess: Boolean = false,
         val errorMessage: String = ""
     ) : UiState
 
     sealed class SignUpUiEvent : UiEvent {
-        data class SignUp(val model : SignUpModel) : SignUpUiEvent()
+        data class SignUp(val model: SignUpModel) : SignUpUiEvent()
     }
 
     sealed class SignUpUiEffect : UiEffect

@@ -43,6 +43,12 @@ enum class SignUpStep {
     ID, PASSWORD, NICKNAME
 }
 
+object SignUpValidator {
+    val ID_REGEX = Regex("^[A-Za-z0-9]{8,20}$")
+    val PASSWORD_REGEX = Regex("^[A-Za-z0-9]{8,20}$")
+    val NICKNAME_REGEX = Regex("^[가-힣a-zA-Z0-9]{1,20}$")
+}
+
 @Composable
 fun SignUpRoute(
     modifier: Modifier,
@@ -55,9 +61,9 @@ fun SignUpRoute(
 
     LaunchedEffect(signUpState) {
         if (signUpState.signUpSuccess) {
-            launch{
+            launch {
                 SnackBarUtils.showSnackBar(
-                    message = "회원가입 성공"
+                    message = context.getString(R.string.sign_up_success)
                 )
             }
             onNavigateToSignIn()
@@ -81,38 +87,54 @@ fun SignUpRoute(
                 )
             )
         },
+        onUpdateId = viewModel::updateId,
+        onUpdatePassword = viewModel::updatePassword,
+        onUpdateNickname = viewModel::updateNickname
     )
 }
 
 @Composable
-fun SignUpScreen(
+private fun SignUpScreen(
     modifier: Modifier = Modifier,
     state: SignUpContract.SignUpUiState,
     onBackButtonPress: () -> Unit,
-    onNextButtonClick: (SignUpModel) -> Unit
+    onNextButtonClick: (SignUpModel) -> Unit,
+    onUpdateId: (String) -> Unit,
+    onUpdatePassword: (String) -> Unit,
+    onUpdateNickname: (String) -> Unit
 ) {
     var step by remember { mutableStateOf(SignUpStep.ID) }
-    var id by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var nickname by remember { mutableStateOf("") }
 
     val titleText = when (step) {
-        SignUpStep.ID -> "아이디를 입력해주세요."
-        SignUpStep.PASSWORD -> "비밀번호를 입력해주세요."
-        SignUpStep.NICKNAME -> "닉네임을 입력해주세요"
+        SignUpStep.ID -> stringResource(R.string.sign_up_title_id)
+        SignUpStep.PASSWORD -> stringResource(R.string.sign_up_title_password)
+        SignUpStep.NICKNAME -> stringResource(R.string.sign_up_title_nickname)
     }
 
     val hintText = when (step) {
-        SignUpStep.ID -> "아이디"
-        SignUpStep.PASSWORD -> "비밀번호"
-        SignUpStep.NICKNAME -> "닉네임"
+        SignUpStep.ID -> stringResource(R.string.sign_up_hint_id)
+        SignUpStep.PASSWORD -> stringResource(R.string.sign_up_hint_password)
+        SignUpStep.NICKNAME -> stringResource(R.string.sign_up_hint_nickname)
     }
 
     val isNextEnabled = when (step) {
-        SignUpStep.ID -> Regex("^[A-Za-z0-9]{8,20}$").matches(id)
-        SignUpStep.PASSWORD -> Regex("^[A-Za-z0-9]{8,20}$").matches(password)
-        SignUpStep.NICKNAME -> Regex("^[가-힣a-zA-Z0-9]{1,20}$").matches(nickname)
+        SignUpStep.ID -> SignUpValidator.ID_REGEX.matches(state.loginId)
+        SignUpStep.PASSWORD -> SignUpValidator.PASSWORD_REGEX.matches(state.password)
+        SignUpStep.NICKNAME -> SignUpValidator.NICKNAME_REGEX.matches(state.nickname)
     }
+
+    val errorMessage = when (step) {
+        SignUpStep.ID -> stringResource(R.string.sign_up_error_id)
+        SignUpStep.PASSWORD -> stringResource(R.string.sign_up_error_password)
+        SignUpStep.NICKNAME -> stringResource(R.string.sign_up_error_nickname)
+    }
+
+    val captionText = when (step) {
+        SignUpStep.ID -> stringResource(R.string.sign_up_id_caption)
+        SignUpStep.PASSWORD -> stringResource(R.string.sign_up_password_caption)
+        SignUpStep.NICKNAME -> stringResource(R.string.sign_up_nickname_caption)
+    }
+
     val context = LocalContext.current
 
     Column(
@@ -144,24 +166,24 @@ fun SignUpScreen(
             when (step) {
                 SignUpStep.ID -> {
                     TivingCommonTextField(
-                        value = id,
+                        value = state.loginId,
                         hint = hintText,
-                        onValueChange = { id = it }
+                        onValueChange = onUpdateId
                     )
                 }
 
                 SignUpStep.PASSWORD -> {
                     TivingCommonPasswordField(
-                        value = password,
+                        value = state.password,
                         hint = hintText,
-                        onValueChange = { password = it }
+                        onValueChange = onUpdatePassword
                     )
                 }
                 SignUpStep.NICKNAME -> {
                     TivingCommonTextField(
-                        value = nickname,
+                        value = state.nickname,
                         hint = hintText,
-                        onValueChange = { nickname = it }
+                        onValueChange = onUpdateNickname
                     )
                 }
             }
@@ -169,11 +191,7 @@ fun SignUpScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = when (step) {
-                    SignUpStep.ID -> stringResource(R.string.sign_up_id_caption)
-                    SignUpStep.PASSWORD -> stringResource(R.string.sign_up_password_caption)
-                    SignUpStep.NICKNAME -> stringResource(R.string.sign_up_nickname_caption)
-                },
+                text = captionText,
                 style = typography.caption.merge(colors.gray04)
             )
 
@@ -189,7 +207,8 @@ fun SignUpScreen(
                     .fillMaxWidth()
                     .imePadding()
                     .background(
-                        color = if (isNextEnabled) colors.basicWhite else Color.Transparent,
+                        color = if (isNextEnabled) colors.basicWhite
+                        else Color.Transparent,
                         shape = RoundedCornerShape(4.dp)
                     )
                     .border(
@@ -202,11 +221,7 @@ fun SignUpScreen(
                         if (!isNextEnabled) {
                             Toast.makeText(
                                 context,
-                                when (step) {
-                                    SignUpStep.ID -> "아이디 형식이 올바르지 않습니다."
-                                    SignUpStep.PASSWORD -> "비밀번호 형식이 올바르지 않습니다."
-                                    SignUpStep.NICKNAME -> "닉네임 형식이 올바르지 않습니다."
-                                },
+                                errorMessage,
                                 Toast.LENGTH_SHORT
                             ).show()
                             return@noRippleClickable
@@ -217,9 +232,9 @@ fun SignUpScreen(
                             SignUpStep.PASSWORD -> step = SignUpStep.NICKNAME
                             SignUpStep.NICKNAME -> onNextButtonClick(
                                 SignUpModel(
-                                    loginId = id,
-                                    password = password,
-                                    nickname = nickname
+                                    loginId = state.loginId,
+                                    password = state.password,
+                                    nickname = state.nickname
                                 )
                             )
                         }
@@ -236,7 +251,10 @@ private fun PreviewSignUpScreen() {
         SignUpScreen(
             state = SignUpContract.SignUpUiState(),
             onBackButtonPress = {},
-            onNextButtonClick = {}
+            onNextButtonClick = {},
+            onUpdateId = {},
+            onUpdatePassword = {},
+            onUpdateNickname = {}
         )
     }
 }

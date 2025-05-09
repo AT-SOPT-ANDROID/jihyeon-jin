@@ -23,6 +23,18 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
+    fun updateId(id: String) {
+        updateState(currentState.copy(loginId = id))
+    }
+
+    fun updatePassword(password: String) {
+        updateState(currentState.copy(password = password))
+    }
+
+    fun updateNickname(nickname: String) {
+        updateState(currentState.copy(nickname = nickname))
+    }
+
     private fun postSignUp(signUpModel: SignUpModel) {
         viewModelScope.launch {
             authRepository.postSignUp(signUpModel).onSuccess { data ->
