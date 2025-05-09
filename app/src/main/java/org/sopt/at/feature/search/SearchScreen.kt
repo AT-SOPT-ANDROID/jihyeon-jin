@@ -14,7 +14,7 @@ fun SearchRoute(
     )
 }
 @Composable
-fun SearchScreen(
+private fun SearchScreen(
     modifier: Modifier = Modifier
 ) {
     Column(

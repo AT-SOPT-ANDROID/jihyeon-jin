@@ -15,7 +15,7 @@ fun ShortsRoute(
     )
 }
 @Composable
-fun ShortsScreen(
+private fun ShortsScreen(
     modifier: Modifier = Modifier
 ) {
     Column(
