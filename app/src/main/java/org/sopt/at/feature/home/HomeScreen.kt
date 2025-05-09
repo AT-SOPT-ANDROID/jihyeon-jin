@@ -31,7 +31,7 @@ fun HomeRoute(
     val homeState by viewModel.uiState.collectAsStateWithLifecycle()
 
     HomeScreen(
-        onNavigateToMyPage = onNavigateToMyPage,
+        onProfileClick = onNavigateToMyPage,
         modifier = modifier,
         homeState = homeState,
         onCategorySelected = { contentCategory ->
@@ -42,7 +42,7 @@ fun HomeRoute(
 
 @Composable
 private fun HomeScreen(
-    onNavigateToMyPage: () -> Unit,
+    onProfileClick: () -> Unit,
     modifier: Modifier = Modifier,
     homeState: HomeUiState,
     onCategorySelected: (ContentCategory) -> Unit
@@ -59,7 +59,7 @@ private fun HomeScreen(
                     // TODO: 무선 연결 안내
                 },
                 onProfileButtonClick = {
-                    onNavigateToMyPage()
+                    onProfileClick()
                 }
             )
         }
