@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,14 +26,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.sopt.at.core.component.BackButtonTopBar
 import org.sopt.at.core.component.TivingCommonPasswordField
 import org.sopt.at.core.component.TivingCommonTextField
 import org.sopt.at.core.extension.noRippleClickable
 import org.sopt.at.core.utils.SnackBarUtils
+import org.sopt.at.domain.model.SignInModel
 import org.sopt.at.feature.signin.viewmodel.SignInViewModel
 import org.sopt.at.ui.theme.TivingTheme.colors
 import org.sopt.at.ui.theme.TivingTheme.typography
@@ -46,15 +46,34 @@ fun SignInRoute(
     viewModel: SignInViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    
+    LaunchedEffect(state) {
+        if(state.loginSuccess){
+            launch{
+                SnackBarUtils.showSnackBar(
+                    message = "로그인 성공"
+                )
+            }
+            onNavigateToHome()
+        } else if(state.errorMessage.isNotEmpty()){
+            launch{
+                SnackBarUtils.showSnackBar(
+                    message = state.errorMessage
+                )
+            }
+        }
+    }
     SignInScreen(
         onBackButtonClick = popBackStack,
         onNavigateToHome = onNavigateToHome,
         onSignUpButtonClick = onNavigateToSignUp,
         onLogin = { email, password ->
             viewModel.sendEvent(
-                SignInContract.SignInUiEvent.SaveLoginInfo(
-                    email,
-                    password
+                SignInContract.SignInUiEvent.SignIn(
+                    SignInModel(
+                        email,
+                        password
+                    )
                 )
             )
         },
@@ -78,6 +97,12 @@ fun SignInScreen(
         colors.brandRed
     else
         colors.gray04
+
+    val buttonTextColor = if (id.isNotBlank() && password.isNotBlank())
+        colors.basicWhite
+    else
+        colors.gray02
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -117,7 +142,7 @@ fun SignInScreen(
             Spacer(Modifier.height(16.dp))
             Text(
                 text = "로그인 하기",
-                style = typography.title.merge(colors.gray02),
+                style = typography.button.merge(buttonTextColor),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -127,7 +152,7 @@ fun SignInScreen(
                     )
                     .padding(14.dp)
                     .noRippleClickable {
-                        // TODO: 서버 통신
+                        onLogin(id, password)
                     }
 
             )

@@ -18,12 +18,12 @@ class SignUpViewModel @Inject constructor(
     private val authRepository: AuthRepository,
 ) : BaseViewModel<SignUpUiState, SignUpUiEvent, SignUpUiEffect>(SignUpUiState()) {
     override fun reduceState(event: SignUpUiEvent) {
-        when(event) {
+        when (event) {
             is SignUpUiEvent.SignUp -> postSignUp(event.model)
         }
     }
 
-    private fun postSignUp(signUpModel: SignUpModel){
+    private fun postSignUp(signUpModel: SignUpModel) {
         viewModelScope.launch {
             authRepository.postSignUp(signUpModel).onSuccess { data ->
                 updateState(

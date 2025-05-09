@@ -20,6 +20,7 @@ import kotlinx.coroutines.delay
 import org.sopt.at.R
 import org.sopt.at.feature.splash.viewmodel.SplashViewModel
 import org.sopt.at.ui.theme.TivingTheme.colors
+
 @Composable
 fun SplashRoute(
     onNavigateToHome: () -> Unit,

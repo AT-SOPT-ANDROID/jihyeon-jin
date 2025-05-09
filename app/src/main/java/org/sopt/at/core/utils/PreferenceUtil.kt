@@ -1,9 +1,9 @@
 package org.sopt.at.core.utils
 
 import android.content.Context
+import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
-import androidx.core.content.edit
 
 
 class PreferenceUtil @Inject constructor(
@@ -12,20 +12,12 @@ class PreferenceUtil @Inject constructor(
     private val sharedPreferences =
         context.getSharedPreferences("tiving_prefs", Context.MODE_PRIVATE)
 
-    fun saveUserId(userId: String) {
-        sharedPreferences.edit { putString(USER_ID, userId) }
+    fun saveUserId(userId: Long) {
+        sharedPreferences.edit { putLong(USER_ID, userId) }
     }
 
-    fun getUserId(): String {
-        return sharedPreferences.getString(USER_ID, "").orEmpty()
-    }
-
-    fun saveUserPw(userPw: String) {
-        sharedPreferences.edit { putString(USER_PW, userPw) }
-    }
-
-    fun getUserPw(): String {
-        return sharedPreferences.getString(USER_PW, "").orEmpty()
+    fun getUserId(): Long {
+        return sharedPreferences.getLong(USER_ID, -1)
     }
     fun saveLoginState(isLogin: Boolean){
         sharedPreferences.edit{putBoolean(IS_LOGIN,isLogin)}

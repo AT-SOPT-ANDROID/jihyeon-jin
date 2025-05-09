@@ -27,11 +27,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlinx.coroutines.launch
 import org.sopt.at.R
 import org.sopt.at.core.component.BackButtonTopBar
 import org.sopt.at.core.component.TivingCommonPasswordField
 import org.sopt.at.core.component.TivingCommonTextField
 import org.sopt.at.core.extension.noRippleClickable
+import org.sopt.at.core.utils.SnackBarUtils
 import org.sopt.at.domain.model.SignUpModel
 import org.sopt.at.feature.signup.viewmodel.SignUpViewModel
 import org.sopt.at.ui.theme.TivingTheme.colors
@@ -53,6 +55,11 @@ fun SignUpRoute(
 
     LaunchedEffect(signUpState) {
         if (signUpState.signUpSuccess) {
+            launch{
+                SnackBarUtils.showSnackBar(
+                    message = "회원가입 성공"
+                )
+            }
             onNavigateToSignIn()
         } else if (signUpState.errorMessage.isNotEmpty()) {
             Toast.makeText(
