@@ -9,12 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import org.sopt.at.core.extension.noRippleClickable
 import org.sopt.at.core.type.toTitleResId
 import org.sopt.at.domain.model.ContentCategory
-import org.sopt.at.ui.theme.Gray3
-import org.sopt.at.ui.theme.White
+import org.sopt.at.ui.theme.TivingTheme.colors
+import org.sopt.at.ui.theme.TivingTheme.typography
 
 @Composable
 fun ContentCategoryRow(
@@ -33,11 +32,11 @@ fun ContentCategoryRow(
                     modifier = Modifier
                         .noRippleClickable { onContentCategorySelected(contentCategory) },
                     text = stringResource(contentCategory.toTitleResId()),
-                    fontSize = 18.sp,
+                    style = typography.subTitle.merge(colors.basicWhite),
                     fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
-                    color = if (selectedContentCategory == ContentCategory.ALL) White
-                    else if (isSelected) White
-                    else Gray3
+                    color = if (selectedContentCategory == ContentCategory.ALL) colors.basicWhite
+                    else if (isSelected) colors.basicWhite
+                    else colors.gray03
                 )
             }
         }

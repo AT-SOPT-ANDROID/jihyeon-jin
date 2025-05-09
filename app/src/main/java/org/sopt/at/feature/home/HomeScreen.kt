@@ -20,7 +20,7 @@ import org.sopt.at.feature.home.component.CommonProgramHorizontalColumn
 import org.sopt.at.feature.home.component.ContentCategoryRow
 import org.sopt.at.feature.home.component.HomeTopBar
 import org.sopt.at.feature.home.component.RankingProgramHorizontalColumn
-import org.sopt.at.ui.theme.Black
+import org.sopt.at.ui.theme.TivingTheme.colors
 
 @Composable
 fun HomeRoute(
@@ -67,7 +67,7 @@ private fun HomeScreen(
             ContentCategoryRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Black)
+                    .background(colors.basicBlack)
                     .padding(16.dp),
                 onContentCategorySelected = { contentCategory ->
                     onCategorySelected(contentCategory)

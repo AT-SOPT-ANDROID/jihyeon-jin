@@ -17,7 +17,7 @@ import org.sopt.at.feature.shorts.navigation.shortsNavGraph
 import org.sopt.at.feature.signin.navigation.signInNavGraph
 import org.sopt.at.feature.signup.navigation.signUpNavGraph
 import org.sopt.at.feature.splash.navigation.splashNavGraph
-import org.sopt.at.ui.theme.Black
+import org.sopt.at.ui.theme.TivingTheme.colors
 
 @Composable
 fun MainNavHost(
@@ -27,7 +27,7 @@ fun MainNavHost(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Black)
+            .background(colors.basicBlack)
     ) {
         NavHost(
             navController = navigator.navController,
@@ -54,7 +54,8 @@ fun MainNavHost(
             historyNavGraph()
             signInNavGraph(
                 onNavigateToHome = navigator::navigateToHome,
-                onNavigateToSignUp = navigator::navigateToSignUp
+                onNavigateToSignUp = navigator::navigateToSignUp,
+                popBackStack = navigator::popBackStack
             )
             signUpNavGraph(
                 popBackStack = navigator::popBackStack,

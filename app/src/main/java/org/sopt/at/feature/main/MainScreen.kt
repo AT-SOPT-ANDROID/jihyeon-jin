@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import kotlinx.collections.immutable.toPersistentList
 import org.sopt.at.core.utils.SnackBarUtils
 import org.sopt.at.feature.main.component.MainBottomBar
-import org.sopt.at.ui.theme.Black
+import org.sopt.at.ui.theme.TivingTheme.colors
 
 @Composable
 fun MainScreen(
@@ -46,14 +46,14 @@ private fun MainScreenContent(
                 navigator = navigator,
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Black)
+                    .background(colors.basicBlack)
                     .statusBarsPadding()
                     .padding(bottom = innerPadding.calculateBottomPadding())
             )
         },
         bottomBar = {
             MainBottomBar(
-                modifier = Modifier.background(Black)
+                modifier = Modifier.background(colors.basicBlack)
                     .navigationBarsPadding(),
                 visible = navigator.shouldShowBottomBar(),
                 tabs = MainTab.entries.toPersistentList(),

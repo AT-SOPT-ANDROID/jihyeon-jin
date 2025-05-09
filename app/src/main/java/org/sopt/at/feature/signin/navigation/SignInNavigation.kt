@@ -12,8 +12,9 @@ fun NavController.navigateToSignIn(email: String, password: String) {
     navigate(Route.SignIn(email,password))
 }
 fun NavGraphBuilder.signInNavGraph(
-    onNavigateToHome: () -> Unit = {},
-    onNavigateToSignUp: () -> Unit = {},
+    onNavigateToHome: () -> Unit,
+    onNavigateToSignUp: () -> Unit,
+    popBackStack: () -> Unit ,
     modifier: Modifier = Modifier
 ) {
     composable<Route.SignIn> { navBackStackEntry->
@@ -24,6 +25,7 @@ fun NavGraphBuilder.signInNavGraph(
             userInputPassword = password,
             onNavigateToHome = onNavigateToHome,
             onNavigateToSignUp = onNavigateToSignUp,
+            popBackStack = popBackStack,
             modifier = modifier
         )
     }

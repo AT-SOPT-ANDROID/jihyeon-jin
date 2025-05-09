@@ -13,8 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.sopt.at.core.extension.noRippleClickable
-import org.sopt.at.ui.theme.Black
-import org.sopt.at.ui.theme.White
+import org.sopt.at.ui.theme.TivingTheme.colors
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,20 +23,20 @@ fun BackButtonTopBar(
     CenterAlignedTopAppBar(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = Black),
+            .background(color = colors.basicBlack),
         title = {},
         navigationIcon = {
             Icon(
                 imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowLeft,
                 contentDescription = "",
-                tint = White,
+                tint = colors.basicWhite,
                 modifier = Modifier
                     .size(32.dp)
                     .noRippleClickable { onBackButtonPress() }
             )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Black,
+            containerColor = colors.basicBlack,
         )
     )
 }

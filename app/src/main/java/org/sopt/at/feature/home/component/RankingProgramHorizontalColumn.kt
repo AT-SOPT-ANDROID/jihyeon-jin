@@ -1,7 +1,6 @@
 package org.sopt.at.feature.home.component
 
 import android.annotation.SuppressLint
-import androidx.compose.runtime.Composable
 import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Arrangement
@@ -14,16 +13,16 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import org.sopt.at.R
 import org.sopt.at.domain.model.HomeRecommendation
 import org.sopt.at.domain.model.Program
 import org.sopt.at.feature.home.component.item.RankingProgramItem
-import org.sopt.at.ui.theme.White
+import org.sopt.at.ui.theme.TivingTheme.colors
+import org.sopt.at.ui.theme.TivingTheme.typography
 
 @SuppressLint("ConfigurationScreenWidthHeight")
 @Composable
@@ -60,9 +59,7 @@ fun RankingProgramHorizontalColumn (
     ) {
         Text(
             text = programLists.title,
-            fontSize = 18.sp,
-            color = White,
-            fontWeight = FontWeight.Bold,
+            style = typography.subTitle.merge(colors.basicWhite),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp)

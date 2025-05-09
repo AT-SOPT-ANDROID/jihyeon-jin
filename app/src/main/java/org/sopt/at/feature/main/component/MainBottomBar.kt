@@ -33,14 +33,13 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.toPersistentList
 import org.sopt.at.feature.main.MainTab
-import org.sopt.at.ui.theme.ATSOPTANDROIDTheme
-import org.sopt.at.ui.theme.Black
-import org.sopt.at.ui.theme.Gray4
-import org.sopt.at.ui.theme.White
+import org.sopt.at.ui.theme.TivingTheme
+import org.sopt.at.ui.theme.TivingTheme.colors
+import org.sopt.at.ui.theme.TivingTheme.typography
+
 
 @Composable
 fun MainBottomBar(
@@ -55,7 +54,7 @@ fun MainBottomBar(
         enter = fadeIn() + slideIn { IntOffset(0, it.height) },
         exit = fadeOut() + slideOut { IntOffset(0, it.height) }
     ) {
-        val borderColor = Gray4
+        val borderColor = colors.gray04
         Row(
             modifier = modifier
                 .fillMaxWidth()
@@ -71,7 +70,7 @@ fun MainBottomBar(
                     )
                 }
                 .background(
-                    color = Black,
+                    color = colors.basicBlack,
                 ),
         ) {
             tabs.forEach { tab ->
@@ -92,7 +91,7 @@ private fun RowScope.MainBottomBarItem(
     selected: Boolean,
     onClick: () -> Unit,
 ) {
-    val itemSelectColor = if (selected) White else Gray4
+    val itemSelectColor = if (selected) colors.basicWhite else colors.gray04
     val itemSelectIcon = if (selected) tab.selectIconResId else tab.defaultIconResId
 
     Column(
@@ -119,8 +118,7 @@ private fun RowScope.MainBottomBarItem(
         )
         Text(
             text = stringResource(tab.descriptionResId),
-            color = itemSelectColor,
-            fontSize = 13.sp
+            style = typography.caption.merge(itemSelectColor),
         )
     }
 }
@@ -128,7 +126,7 @@ private fun RowScope.MainBottomBarItem(
 @Preview
 @Composable
 private fun MainBottomBarPreview() {
-    ATSOPTANDROIDTheme {
+    TivingTheme {
         Column(Modifier.fillMaxSize()) {
             MainBottomBar(
                 visible = true,
