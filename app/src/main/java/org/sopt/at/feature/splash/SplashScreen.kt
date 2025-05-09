@@ -45,7 +45,7 @@ fun SplashRoute(
 }
 
 @Composable
-fun SplashScreen(
+private fun SplashScreen(
     modifier: Modifier = Modifier
 ) {
     Column(
