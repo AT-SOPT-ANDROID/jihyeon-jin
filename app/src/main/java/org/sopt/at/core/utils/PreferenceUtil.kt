@@ -32,7 +32,6 @@ class PreferenceUtil @Inject constructor(
 
     companion object {
         private const val USER_ID = "user_id"
-        private const val USER_PW = "user_pw"
         private const val IS_LOGIN = "is_login"
     }
 }
