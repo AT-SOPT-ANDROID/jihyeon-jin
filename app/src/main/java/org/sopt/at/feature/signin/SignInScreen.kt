@@ -39,8 +39,6 @@ import org.sopt.at.ui.theme.TivingTheme.typography
 
 @Composable
 fun SignInRoute(
-    userInputEmail: String,
-    userInputPassword: String,
     popBackStack: () -> Unit,
     onNavigateToHome: () -> Unit,
     onNavigateToSignUp: () -> Unit,
@@ -49,8 +47,6 @@ fun SignInRoute(
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     SignInScreen(
-        userInputEmail = userInputEmail,
-        userInputPassword = userInputPassword,
         onBackButtonClick = popBackStack,
         onNavigateToHome = onNavigateToHome,
         onSignUpButtonClick = onNavigateToSignUp,
@@ -68,8 +64,6 @@ fun SignInRoute(
 }
 @Composable
 fun SignInScreen(
-    userInputEmail: String,
-    userInputPassword: String,
     onBackButtonClick: () -> Unit,
     onNavigateToHome: () -> Unit,
     onSignUpButtonClick: () -> Unit,
@@ -133,22 +127,7 @@ fun SignInScreen(
                     )
                     .padding(14.dp)
                     .noRippleClickable {
-                        if (userInputEmail.isNotEmpty() &&
-                            userInputPassword.isNotEmpty() &&
-                            userInputEmail == id &&
-                            userInputPassword == password
-                        ) {
-                            onLogin(userInputEmail, userInputPassword)
-                            onNavigateToHome()
-                        } else {
-                            // TODO: 추후 이펙트로 빼기
-                            CoroutineScope(Dispatchers.Main).launch {
-                                SnackBarUtils.showSnackBar(
-                                    message = "아이디 또는 비밀번호가 일치하지 않습니다.",
-                                    actionLabel = "닫기"
-                                )
-                            }
-                        }
+                        // TODO: 서버 통신
                     }
 
             )
@@ -192,8 +171,6 @@ fun SignInScreen(
 private fun PreviewSignInScreen() {
     Column(Modifier.background(colors.basicBlack)) {
         SignInScreen(
-            userInputEmail = "",
-            userInputPassword = "",
             onNavigateToHome = { },
             onSignUpButtonClick = { },
             onBackButtonClick = {},

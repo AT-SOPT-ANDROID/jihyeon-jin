@@ -23,7 +23,7 @@ import org.sopt.at.ui.theme.TivingTheme.colors
 @Composable
 fun SplashRoute(
     onNavigateToHome: () -> Unit,
-    onNavigateToSignIn: (String, String) -> Unit,
+    onNavigateToSignIn: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
@@ -38,7 +38,7 @@ fun SplashRoute(
 @Composable
 fun SplashScreen(
     onNavigateToHome: () -> Unit,
-    onNavigateToSignIn: (String, String) -> Unit,
+    onNavigateToSignIn: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
@@ -50,7 +50,7 @@ fun SplashScreen(
         if (state.isLogin) {
             onNavigateToHome()
         } else {
-            onNavigateToSignIn("", "")
+            onNavigateToSignIn()
         }
     }
     Column(

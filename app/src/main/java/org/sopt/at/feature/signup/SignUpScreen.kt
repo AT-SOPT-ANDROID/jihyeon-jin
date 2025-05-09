@@ -20,9 +20,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.sopt.at.R
 import org.sopt.at.core.component.BackButtonTopBar
 import org.sopt.at.core.component.TivingCommonPasswordField
 import org.sopt.at.core.component.TivingCommonTextField
@@ -31,14 +33,14 @@ import org.sopt.at.ui.theme.TivingTheme.colors
 import org.sopt.at.ui.theme.TivingTheme.typography
 
 enum class SignUpStep {
-    ID, PASSWORD
+    ID, PASSWORD, NICKNAME
 }
 
 @Composable
 fun SignUpRoute(
     modifier: Modifier,
     popBackStack: () -> Unit,
-    onNavigateToSignIn: (String, String) -> Unit
+    onNavigateToSignIn: () -> Unit
 ) {
     SignUpScreen(
         modifier = modifier,
@@ -51,26 +53,30 @@ fun SignUpRoute(
 fun SignUpScreen(
     modifier: Modifier = Modifier,
     onBackButtonPress: () -> Unit,
-    onNextButtonClick: (String, String) -> Unit,
+    onNextButtonClick: () -> Unit,
 ) {
     var step by remember { mutableStateOf(SignUpStep.ID) }
     var id by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var nickname by remember { mutableStateOf("") }
 
     val titleText = when (step) {
         SignUpStep.ID -> "아이디를 입력해주세요."
         SignUpStep.PASSWORD -> "비밀번호를 입력해주세요."
+        SignUpStep.NICKNAME -> "닉네임을 입력해주세요"
     }
 
     val hintText = when (step) {
         SignUpStep.ID -> "아이디"
         SignUpStep.PASSWORD -> "비밀번호"
+        SignUpStep.NICKNAME -> "닉네임"
     }
 
     val isNextEnabled = when (step) {
-        SignUpStep.ID -> Regex("^[a-z0-9]{6,12}$").matches(id)
+        SignUpStep.ID -> Regex("^[A-Za-z0-9]{8,20}$").matches(id)
         SignUpStep.PASSWORD -> Regex("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#\$%^&*])[A-Za-z\\d~!@#\$%^&*]{8,15}\$")
             .matches(password)
+        SignUpStep.NICKNAME -> Regex("^[가-힣a-zA-Z0-9]{1,20}$").matches(nickname)
     }
     val context = LocalContext.current
 
@@ -116,14 +122,22 @@ fun SignUpScreen(
                         onValueChange = { password = it }
                     )
                 }
+                SignUpStep.NICKNAME -> {
+                    TivingCommonTextField(
+                        value = nickname,
+                        hint = hintText,
+                        onValueChange = { nickname = it }
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
                 text = when (step) {
-                    SignUpStep.ID -> "영문 소문자 또는 영문 소문자, 숫자 조합 6~12 자리"
-                    SignUpStep.PASSWORD -> "영문, 숫자, 특수문자(~!@#$%^&*) 조합 8~15 자리"
+                    SignUpStep.ID -> stringResource(R.string.sign_up_id_caption)
+                    SignUpStep.PASSWORD -> stringResource(R.string.sign_up_password_caption)
+                    SignUpStep.NICKNAME -> stringResource(R.string.sign_up_nickname_caption)
                 },
                 style = typography.caption.merge(colors.gray04)
             )
@@ -156,6 +170,7 @@ fun SignUpScreen(
                                 when (step) {
                                     SignUpStep.ID -> "아이디 형식이 올바르지 않습니다."
                                     SignUpStep.PASSWORD -> "비밀번호 형식이 올바르지 않습니다."
+                                    SignUpStep.NICKNAME -> "닉네임 형식이 올바르지 않습니다."
                                 },
                                 Toast.LENGTH_SHORT
                             ).show()
@@ -164,7 +179,8 @@ fun SignUpScreen(
 
                         when (step) {
                             SignUpStep.ID -> step = SignUpStep.PASSWORD
-                            SignUpStep.PASSWORD -> onNextButtonClick(id, password)
+                            SignUpStep.PASSWORD -> step = SignUpStep.NICKNAME
+                            SignUpStep.NICKNAME -> onNextButtonClick()
                         }
                     }
             )
@@ -178,7 +194,7 @@ private fun PreviewSignUpScreen() {
     Column(Modifier.background(colors.basicBlack)) {
         SignUpScreen(
             onBackButtonPress = {},
-            onNextButtonClick = { _, _ -> }
+            onNextButtonClick = {}
         )
     }
 }

@@ -16,7 +16,7 @@ import org.sopt.at.ui.theme.TivingTheme.typography
 
 @Composable
 fun MyPageRoute(
-    onNavigateToSignIn: (String, String) -> Unit,
+    onNavigateToSignIn: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MyPageViewModel = hiltViewModel()
 ) {
@@ -28,7 +28,7 @@ fun MyPageRoute(
 }
 @Composable
 fun MyPageScreen(
-    onLogOutButtonClick: (String, String) -> Unit,
+    onLogOutButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MyPageViewModel = hiltViewModel(),
 ) {
@@ -49,7 +49,7 @@ fun MyPageScreen(
         Button(
             onClick = {
                 viewModel.sendEvent(MyPageContract.MyPageUiEvent.LogOut)
-                onLogOutButtonClick("", "")
+                onLogOutButtonClick()
             }
         ) {
             Text(

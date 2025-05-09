@@ -53,8 +53,8 @@ class MainNavigator(
     }
 
 
-    fun navigateToSignIn(email: String, password: String) {
-        navController.navigateToSignIn(email, password)
+    fun navigateToSignIn() {
+        navController.navigateToSignIn()
     }
 
     fun navigateToSignUp() {

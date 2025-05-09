@@ -8,7 +8,7 @@ import org.sopt.at.feature.splash.SplashRoute
 
 fun NavGraphBuilder.splashNavGraph(
     onNavigateToHome: () -> Unit,
-    onNavigateToSignIn: (String, String) -> Unit,
+    onNavigateToSignIn: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     composable<Route.Splash> {

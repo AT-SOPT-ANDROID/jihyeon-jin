@@ -8,8 +8,8 @@ import androidx.navigation.toRoute
 import org.sopt.at.core.navigation.Route
 import org.sopt.at.feature.signin.SignInRoute
 
-fun NavController.navigateToSignIn(email: String, password: String) {
-    navigate(Route.SignIn(email,password))
+fun NavController.navigateToSignIn() {
+    navigate(Route.SignIn)
 }
 fun NavGraphBuilder.signInNavGraph(
     onNavigateToHome: () -> Unit,
@@ -17,12 +17,8 @@ fun NavGraphBuilder.signInNavGraph(
     popBackStack: () -> Unit ,
     modifier: Modifier = Modifier
 ) {
-    composable<Route.SignIn> { navBackStackEntry->
-        val email = navBackStackEntry.toRoute<Route.SignIn>().email
-        val password = navBackStackEntry.toRoute<Route.SignIn>().password
+    composable<Route.SignIn> {
         SignInRoute(
-            userInputEmail = email,
-            userInputPassword = password,
             onNavigateToHome = onNavigateToHome,
             onNavigateToSignUp = onNavigateToSignUp,
             popBackStack = popBackStack,

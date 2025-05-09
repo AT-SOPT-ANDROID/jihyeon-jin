@@ -11,7 +11,7 @@ fun NavController.navigateToMyPage() {
 }
 fun NavGraphBuilder.myPageNavGraph(
     modifier: Modifier = Modifier,
-    onNavigateToSignIn: (String, String) -> Unit
+    onNavigateToSignIn: () -> Unit
 ) {
     composable<Route.MyPage> {
         MyPageRoute(
