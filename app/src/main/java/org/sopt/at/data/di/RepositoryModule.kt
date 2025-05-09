@@ -2,7 +2,6 @@ package org.sopt.at.data.di
 
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.sopt.at.data.repositoryimpl.AuthRepositoryImpl
@@ -16,11 +15,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
-    @Provides
+    @Binds
     @Singleton
-    fun provideDummyHomeContentRepository(): DummyHomeProgramRepository {
-        return DummyHomeContentRepositoryImpl()
-    }
+    abstract fun bindsDummyHomeContentRepository(
+        dummyHomeContentRepositoryImpl: DummyHomeContentRepositoryImpl
+    ): DummyHomeProgramRepository
 
     @Binds
     @Singleton
