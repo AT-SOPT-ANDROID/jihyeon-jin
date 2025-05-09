@@ -28,21 +28,6 @@ fun SplashRoute(
     modifier: Modifier = Modifier,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
-    SplashScreen(
-        onNavigateToHome = onNavigateToHome,
-        onNavigateToSignIn = onNavigateToSignIn,
-        modifier = modifier,
-        viewModel = viewModel
-    )
-}
-
-@Composable
-fun SplashScreen(
-    onNavigateToHome: () -> Unit,
-    onNavigateToSignIn: () -> Unit,
-    modifier: Modifier = Modifier,
-    viewModel: SplashViewModel = hiltViewModel()
-) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
@@ -54,6 +39,15 @@ fun SplashScreen(
             onNavigateToSignIn()
         }
     }
+    SplashScreen(
+        modifier = modifier
+    )
+}
+
+@Composable
+fun SplashScreen(
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
             .background(color = colors.basicBlack)
