@@ -37,7 +37,7 @@ fun MyPageRoute(
     )
 }
 @Composable
-fun MyPageScreen(
+private fun MyPageScreen(
     onLogOutButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
     state: MyPageContract.MyPageUiState,
