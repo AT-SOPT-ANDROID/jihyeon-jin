@@ -14,7 +14,7 @@ fun HistoryRoute(
     )
 }
 @Composable
-fun HistoryScreen(
+private fun HistoryScreen(
     modifier: Modifier = Modifier
 ) {
     Column(

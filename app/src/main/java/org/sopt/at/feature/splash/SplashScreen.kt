@@ -20,25 +20,11 @@ import kotlinx.coroutines.delay
 import org.sopt.at.R
 import org.sopt.at.feature.splash.viewmodel.SplashViewModel
 import org.sopt.at.ui.theme.TivingTheme.colors
+
 @Composable
 fun SplashRoute(
     onNavigateToHome: () -> Unit,
-    onNavigateToSignIn: (String, String) -> Unit,
-    modifier: Modifier = Modifier,
-    viewModel: SplashViewModel = hiltViewModel()
-) {
-    SplashScreen(
-        onNavigateToHome = onNavigateToHome,
-        onNavigateToSignIn = onNavigateToSignIn,
-        modifier = modifier,
-        viewModel = viewModel
-    )
-}
-
-@Composable
-fun SplashScreen(
-    onNavigateToHome: () -> Unit,
-    onNavigateToSignIn: (String, String) -> Unit,
+    onNavigateToSignIn: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
@@ -50,9 +36,18 @@ fun SplashScreen(
         if (state.isLogin) {
             onNavigateToHome()
         } else {
-            onNavigateToSignIn("", "")
+            onNavigateToSignIn()
         }
     }
+    SplashScreen(
+        modifier = modifier
+    )
+}
+
+@Composable
+private fun SplashScreen(
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
             .background(color = colors.basicBlack)

@@ -7,16 +7,15 @@ sealed interface Route {
     data object Splash : Route
 
     @Serializable
-    data class SignIn(
-        val email: String,
-        val password: String
-    ) : Route
+    data object SignIn : Route
 
     @Serializable
     data object SignUp : Route
 
     @Serializable
     data object MyPage : Route
+    @Serializable
+    data object Nickname : Route
 }
 
 sealed interface MainTabRoute : Route {

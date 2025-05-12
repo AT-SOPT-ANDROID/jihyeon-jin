@@ -27,4 +27,27 @@
     <!-- Image Description -->
     <string name="image_cennect">무선 연결</string>
     <string name="image_profile">내 프로필</string>
+    <string name="sign_up_id_caption">대문자/소문자/숫자만 사용 가능하며 8자 이상 20자이하</string>
+    <string name="sign_up_password_caption">대문자/소문자/숫자만 사용 가능하며 8자 이상 20자이하</string>
+    <string name="sign_up_nickname_caption">한글/영문/숫자만 사용 가능하며 1자 이상 20자 이하</string>
+    <string name="my_page_logout">로그아웃</string>
+    <string name="sign_up_success">회원가입 성공</string>
+    <string name="sign_up_title_id">아이디를 입력해주세요.</string>
+    <string name="sign_up_title_password">비밀번호를 입력해주세요.</string>
+    <string name="sign_up_title_nickname">닉네임을 입력해주세요</string>
+    <string name="sign_up_hint_id">아이디</string>
+    <string name="sign_up_hint_password">비밀번호</string>
+    <string name="sign_up_hint_nickname">닉네임</string>
+    <string name="sign_up_error_id">아이디 형식이 올바르지 않습니다.</string>
+    <string name="sign_up_error_password">비밀번호 형식이 올바르지 않습니다.</string>
+    <string name="sign_up_error_nickname">닉네임 형식이 올바르지 않습니다.</string>
+    <string name="sign_in_title">TIVING ID 로그인</string>
+    <string name="sign_in_hint_id">아이디</string>
+    <string name="sign_in_hint_pasword">비밀번호</string>
+    <string name="sign_in_text_button">로그인 하기</string>
+    <string name="sign_in_find_id">아이디 찾기</string>
+    <string name="sign_in_find_password">비밀번호 찾기</string>
+    <string name="sign_in">회원가입</string>
+    <string name="sign_in_notice">이 사이트는 Google reCAPTCHA로 보호되며,\nGoogle 개인정보 처리 방침과 서비스 약관이 적용됩니다.</string>
+    <string name="sign_in_success_login">로그인 성공</string>
 </resources>

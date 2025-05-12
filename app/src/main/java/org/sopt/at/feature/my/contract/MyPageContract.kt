@@ -1,4 +1,4 @@
-package org.sopt.at.feature.my
+package org.sopt.at.feature.my.contract
 
 import org.sopt.at.feature.util.UiEffect
 import org.sopt.at.feature.util.UiEvent
@@ -6,12 +6,14 @@ import org.sopt.at.feature.util.UiState
 
 class MyPageContract {
     data class MyPageUiState(
-        val id: String = "",
+        val userId: Long = -1,
+        val nickname: String = "",
         val isLoading: Boolean = false
     ) : UiState
 
     sealed class MyPageUiEvent : UiEvent {
-        data object LoadAuthInfo : MyPageUiEvent()
+        data object LoadIdInfo : MyPageUiEvent()
+        data object LoadNickname : MyPageUiEvent()
         data object LogOut : MyPageUiEvent()
     }
 

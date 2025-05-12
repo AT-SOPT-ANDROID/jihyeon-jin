@@ -59,20 +59,16 @@ fun MainNavHost(
             )
             signUpNavGraph(
                 popBackStack = navigator::popBackStack,
-                onNavigateToSignIn = { email, password ->
-                    navigator.navigateToSignIn(email, password)
-                }
+                onNavigateToSignIn = navigator::navigateToSignIn
             )
             splashNavGraph(
                 onNavigateToHome = navigator::navigateToHome,
-                onNavigateToSignIn = { email, password ->
-                    navigator.navigateToSignIn(email, password)
-                }
+                onNavigateToSignIn = navigator::navigateToSignIn
             )
             myPageNavGraph(
-                onNavigateToSignIn = { email, password ->
-                    navigator.navigateToSignIn(email, password)
-                }
+                popBackStack = navigator::popBackStack,
+                onNavigateToNickname = navigator::navigateToNickname,
+                onNavigateToSignIn = navigator::navigateToSignIn
             )
         }
     }

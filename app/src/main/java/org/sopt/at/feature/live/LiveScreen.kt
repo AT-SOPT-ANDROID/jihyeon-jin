@@ -15,7 +15,7 @@ fun LiveRoute(
     )
 }
 @Composable
-fun LiveScreen(
+private fun LiveScreen(
     modifier: Modifier = Modifier
 ) {
     Column(
