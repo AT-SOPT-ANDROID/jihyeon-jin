@@ -7,7 +7,6 @@ import dagger.hilt.components.SingletonComponent
 import org.sopt.at.data.service.AuthService
 import org.sopt.at.data.service.UserService
 import retrofit2.Retrofit
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
