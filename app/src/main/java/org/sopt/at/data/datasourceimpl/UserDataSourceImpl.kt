@@ -2,6 +2,7 @@ package org.sopt.at.data.datasourceimpl
 
 import org.sopt.at.data.datasource.UserDataSource
 import org.sopt.at.data.dto.base.BaseResponse
+import org.sopt.at.data.dto.request.ChangeNicknameRequest
 import org.sopt.at.data.dto.request.MyNicknameRequest
 import org.sopt.at.data.dto.response.MyNicknameResponse
 import org.sopt.at.data.dto.response.SearchUserResponse
@@ -16,5 +17,8 @@ class UserDataSourceImpl  @Inject constructor(
 
     override suspend fun getUserList(request: String): BaseResponse<SearchUserResponse> =
         userService.getUserList(request)
+
+    override suspend fun patchNickname(request: ChangeNicknameRequest) : BaseResponse<Unit> =
+        userService.patchNickname(request.userId, request.nickname)
 
 }

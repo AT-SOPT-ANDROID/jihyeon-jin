@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,7 +29,6 @@ import org.sopt.at.core.component.TivingCommonTextField
 import org.sopt.at.core.extension.noRippleClickable
 import org.sopt.at.feature.my.contract.NicknameContract
 import org.sopt.at.feature.my.viewmodel.NicknameViewmodel
-import org.sopt.at.feature.signup.SignUpValidator
 import org.sopt.at.ui.theme.TivingTheme.colors
 import org.sopt.at.ui.theme.TivingTheme.typography
 
@@ -39,6 +39,30 @@ fun NicknameRoute(
     viewModel: NicknameViewmodel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.sendEvent(NicknameContract.NicknameUiEvent.LoadIdInfo)
+    }
+
+    LaunchedEffect(state) {
+        if (state.changeSuccess) {
+            Toast.makeText(
+                context,
+                "닉네임이 수정되었습니다.",
+                Toast.LENGTH_SHORT
+            ).show()
+            viewModel.clearErrorMessage()
+            popBackStack()
+        } else if(state.errorMessage.isNotEmpty()){
+            Toast.makeText(
+                context,
+                state.errorMessage,
+                Toast.LENGTH_SHORT
+            ).show()
+            viewModel.clearErrorMessage()
+        }
+    }
 
     NicknameScreen(
         onBackButtonClick = popBackStack,
@@ -46,7 +70,6 @@ fun NicknameRoute(
             viewModel.sendEvent(
                 NicknameContract.NicknameUiEvent.PatchNickname(nickname)
             )
-            popBackStack()
         },
         onUpdateNickname = { nickname ->
             viewModel.updateNickname(nickname)
@@ -63,9 +86,6 @@ private fun NicknameScreen(
     modifier: Modifier = Modifier,
     state: NicknameContract.NicknameUiState,
 ) {
-    val context = LocalContext.current
-    val isNextEnabled = SignUpValidator.NICKNAME_REGEX.matches(state.nickname)
-
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -109,34 +129,22 @@ private fun NicknameScreen(
             Spacer(Modifier.weight(1f))
             Text(
                 text = "수정",
-                style = typography.button.merge(
-                    if (isNextEnabled) colors.basicBlack
-                    else colors.gray02
-                ),
+                style = typography.button.merge(colors.gray02),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .imePadding()
                     .background(
-                        color = if (isNextEnabled) colors.basicWhite
-                        else Color.Transparent,
+                        color = Color.Transparent,
                         shape = RoundedCornerShape(4.dp)
                     )
                     .border(
                         1.dp,
-                        if (isNextEnabled) Color.Transparent else colors.gray02,
+                        colors.gray02,
                         RoundedCornerShape(4.dp)
                     )
                     .padding(16.dp)
-                    .noRippleClickable {
-                        if (!isNextEnabled) {
-                            Toast.makeText(
-                                context,
-                                context.getString(R.string.sign_up_error_nickname),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            return@noRippleClickable
-                        }
+                    .noRippleClickable{
                         onChangeButtonClick(state.nickname)
                     }
             )

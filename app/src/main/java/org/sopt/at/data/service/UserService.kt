@@ -3,8 +3,11 @@ package org.sopt.at.data.service
 import org.sopt.at.data.dto.base.BaseResponse
 import org.sopt.at.data.dto.response.MyNicknameResponse
 import org.sopt.at.data.dto.response.SearchUserResponse
+import org.sopt.at.domain.model.NicknameModel
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.PATCH
 import retrofit2.http.Query
 
 interface UserService {
@@ -17,4 +20,10 @@ interface UserService {
     suspend fun getUserList(
         @Query("keyword") keyword: String
     ): BaseResponse<SearchUserResponse>
+
+    @PATCH("/api/v1/users")
+    suspend fun patchNickname(
+        @Header("userId") userId: Long,
+        @Body nickname: NicknameModel
+    ): BaseResponse<Unit>
 }
