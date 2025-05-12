@@ -14,6 +14,8 @@ sealed interface Route {
 
     @Serializable
     data object MyPage : Route
+    @Serializable
+    data object Nickname : Route
 }
 
 sealed interface MainTabRoute : Route {

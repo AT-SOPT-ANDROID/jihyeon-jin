@@ -15,6 +15,7 @@ import org.sopt.at.feature.history.navigation.navigateToHistory
 import org.sopt.at.feature.home.navigation.navigateToHome
 import org.sopt.at.feature.live.navigation.navigateToLive
 import org.sopt.at.feature.my.navigation.navigateToMyPage
+import org.sopt.at.feature.my.navigation.navigateToNickname
 import org.sopt.at.feature.search.navigation.navigateToSearch
 import org.sopt.at.feature.shorts.navigation.navigateToShorts
 import org.sopt.at.feature.signin.navigation.navigateToSignIn
@@ -65,6 +66,9 @@ class MainNavigator(
         navController.navigateToMyPage()
     }
 
+    fun navigateToNickname() {
+        navController.navigateToNickname()
+    }
 
     fun navigateToHome(navOptions: NavOptions? = null) {
         navController.navigateToHome(

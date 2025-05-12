@@ -7,9 +7,9 @@ import kotlinx.coroutines.launch
 import org.sopt.at.core.utils.PreferenceUtil
 import org.sopt.at.domain.model.MyNicknameModel
 import org.sopt.at.domain.repository.UserRepository
-import org.sopt.at.feature.my.MyPageContract.MyPageUiEffect
-import org.sopt.at.feature.my.MyPageContract.MyPageUiEvent
-import org.sopt.at.feature.my.MyPageContract.MyPageUiState
+import org.sopt.at.feature.my.contract.MyPageContract.MyPageUiEffect
+import org.sopt.at.feature.my.contract.MyPageContract.MyPageUiEvent
+import org.sopt.at.feature.my.contract.MyPageContract.MyPageUiState
 import org.sopt.at.feature.util.BaseViewModel
 import javax.inject.Inject
 

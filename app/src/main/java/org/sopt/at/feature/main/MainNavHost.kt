@@ -66,6 +66,8 @@ fun MainNavHost(
                 onNavigateToSignIn = navigator::navigateToSignIn
             )
             myPageNavGraph(
+                popBackStack = navigator::popBackStack,
+                onNavigateToNickname = navigator::navigateToNickname,
                 onNavigateToSignIn = navigator::navigateToSignIn
             )
         }

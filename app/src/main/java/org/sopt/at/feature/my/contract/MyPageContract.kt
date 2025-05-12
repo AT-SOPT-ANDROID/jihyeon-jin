@@ -1,4 +1,4 @@
-package org.sopt.at.feature.my
+package org.sopt.at.feature.my.contract
 
 import org.sopt.at.feature.util.UiEffect
 import org.sopt.at.feature.util.UiEvent
